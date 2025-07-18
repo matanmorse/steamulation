@@ -3,7 +3,10 @@ import { fileURLToPath } from 'url';
 import path from 'node:path'
 import { getRomsFromFolder, readFiles, selectExe, selectRomFolder } from './services/fileService.js';
 import { launchGame } from './services/launchGameService.js';
-import config, { hasSettings, resetSettings } from './services/configService.js'
+import config, { getEmulators, getEmulatorsConfig, getEmulatorsPrettyNames, hasSettings, isDev, resetSettings } from './services/configService.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -19,8 +22,11 @@ const createWindow = () => {
         }
     })
 
-    win.loadURL('http://localhost:5173');
+    if (isDev()) win.loadURL('http://localhost:5173');
+    else win.loadFile(path.join(__dirname, './renderer/dist/index.html'))
 }
+
+console.log(isDev())
 
 app.whenReady().then(() => {
     createWindow();
@@ -33,7 +39,8 @@ app.whenReady().then(() => {
     ipcMain.handle('select-rom-folder', async () => selectRomFolder())
     ipcMain.handle('has-settings', () => hasSettings())
     ipcMain.handle('reset-settings', (e, emulator) => resetSettings(emulator))
-    
+    ipcMain.handle('get-emulators-config', () => getEmulatorsConfig())
+
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })

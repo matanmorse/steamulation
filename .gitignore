@@ -3,3 +3,4 @@ package.json
 .vscode
 node_modules
 src/renderer/node_modules
+out/

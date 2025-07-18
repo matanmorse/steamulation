@@ -12,6 +12,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -26,8 +27,8 @@ body {
   display: flex;
   justify-content: center;
   min-width: 320px;
-  min-height: 100vh;
-  background-color: var(--clr-surface-a0);
+  height: 100vh;
+  background-color: var(--clr-surface-dark);
 }
 
 h1 {
@@ -89,8 +90,9 @@ button:disabled {
   --clr-primary-a50: #c4d4ed;
 
   /** Theme surface colors */
+  --clr-surface-dark: #161e27;
   --clr-surface-a0: #1d2a36;
-  --clr-surface-a10: #333e4a;
+  --clr-surface-a10: #394757;
   --clr-surface-a20: #49535e;
   --clr-surface-a30: #616a73;
   --clr-surface-a40: #798189;
@@ -106,6 +108,8 @@ button:disabled {
 
   --clr-light-a0: #FFFFFF;
   --clr-light-a10: #F5f5f5;
+  --clr-light-a30: #f2f2f2;
+  --clr-light-a50: #c4c4c4;
 
   --clr-danger: rgb(222, 95, 95);
 }

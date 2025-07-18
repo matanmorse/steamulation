@@ -7,12 +7,17 @@ const Layout = () => {
         <>
             <header>
                 <nav class="navbar">
-                    <Link to="/">
-                        <i className="bi bi-house-fill nav-link" />
-                    </Link>
-                    <Link to="/settings">
-                        <i class='bi bi-gear-fill nav-link' /> 
-                    </Link>
+                    <div>
+                        <h3 class="nav-title">Steamulator</h3>
+                    </div>
+                    <div className="nav-links">
+                        <Link to="/">
+                            <i className="bi bi-house-fill nav-link" />
+                        </Link>
+                        <Link to="/settings">
+                            <i class='bi bi-gear-fill nav-link' />
+                        </Link>
+                    </div>
                 </nav>
             </header>
             <div id="root">

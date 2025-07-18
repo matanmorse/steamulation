@@ -1,4 +1,122 @@
+.settings-main {
+  display:flex;
+  height: 100%;
+}
 
+.sidebar {
+  flex: 1;
+  min-width: 250px;
+  border-right: 1px solid var(--clr-surface-a10);
+  
+  .sidebar-title {
+    font-size: 20pt;
+    color: var(--clr-primary-a20);
+  }  
+
+  .sidebar-title-wrapper {
+    display: flex;
+    align-items: center;
+    margin: 1rem;
+    gap: 1rem
+  }
+
+
+  .settings-gear {
+    font-size: 18pt;
+    color: var(--clr-primary-a20);
+  }
+  .emulators-list {
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .emulator-select-wrapper {
+    padding:.5rem 1rem .5rem  1rem ;
+    border-radius: 3px;
+    transition: .2s all;
+  }
+
+  .emulator-select-hover:hover {
+    background-color: rgba(255,255,255,0.3);
+  }
+
+  .emulator-select-selected {
+    background-color: var(--clr-primary-a0);
+  }
+}
+
+.emulator-settings {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+
+  .emulator-settings-wrapper {
+    max-width: 1000px;
+  }
+
+  .settings-form {
+    background-color: var(--clr-surface-a10);
+    padding: 1rem 2rem 1rem 2rem ;  
+    text-align: start;
+    border-radius: 10px;
+    min-height: 400px;
+    label {
+      color: var(--clr-light-a30)
+    }
+
+    button {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      height: auto;
+    }
+    .exe-path-form-wrapper {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    input[type="text"] {
+      padding: 1rem;
+      background-color: var(--clr-surface-a0);
+      border: 1px solid var(--clr-surface-a30);
+      border-radius: 5px;
+      flex: 1;
+    }
+    input[type="text"]::placeholder {
+      color: var(--clr-light-a10);
+      font-size: 12pt;
+    }
+    .exe-input-wrapper {
+      gap: .5rem;
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+  }
+
+  .settings-title-wrapper {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .25rem;
+    border-bottom: 1px solid var(--clr-surface-a10);
+
+    h2 {
+      font-weight: bolder;
+      margin: 0rem;
+    }
+  }
+
+  .settings-gear {
+    font-size: 22pt;
+    color: var(--clr-primary-a20)
+  }
+}
 
 .custom-file-input::-webkit-file-upload-button {
     visibility: hidden;
@@ -29,18 +147,6 @@
   background-color: var(--clr-danger);
 }
 
-.settings-form {
-  background-color: var(--clr-surface-a10);
-  padding: 1rem;  
-  margin-left: 5rem;
-  display: grid;
-  width: fit-content;
-  margin:auto;
-  grid-template-columns: 100px 200px 200px 200px;
-  gap: 1rem;
-  text-align: start;
-  align-items: center;
-}
 
 .citra-logo {
   src: url('https://upload.wikimedia.org/wikipedia/commons/d/d4/Citra_Logo.svg');

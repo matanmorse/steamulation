@@ -11,6 +11,7 @@ const configRootPath = path.resolve(__dirname,'../resources', 'config.json')
 
 const config = JSON.parse(readFileSync(configRootPath, 'utf-8'));
 
+const isDev = () => process.env.NODE_ENVIRONMENT === 'Development'
 
 const getEmulatorPath = (name) => settingsStore.get(`${name}-exe-path`)
 const getRomFolderPath = () => settingsStore.get('romfolder-path')
@@ -73,7 +74,18 @@ const getEmulatorsPrettyNames = () => {
     return emulatorsPrettyNames
 }
 
+const getEmulatorsConfig = () => {
+    var fullConfig = config.emulators;
+    console.log(config.emulators)
+    for (const emulator of fullConfig) {
+        console.log(emulator.prettyName, getEmulatorPath(emulator.name))
+        emulator.exePath = getEmulatorPath(emulator.name)
+    }
+    return fullConfig
+}
 
-export {getEmulatorPath, getRomFolderPath, setEmulatorPath, setRomFolderPath, hasSettings, resetSettings, getEmulators, getEmulatorsPrettyNames}
+export {getEmulatorPath, getRomFolderPath, setEmulatorPath, 
+    setRomFolderPath, hasSettings, resetSettings, getEmulators, 
+    getEmulatorsPrettyNames, isDev, getEmulatorsConfig}
 
 export default config;

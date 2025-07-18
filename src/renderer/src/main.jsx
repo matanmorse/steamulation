@@ -1,20 +1,21 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './styles/index.css'
-import App from './components/App.jsx'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import App from './pages/App.jsx'
+import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
 import Layout from './pages/Layout.jsx'
-import Settings from './components/Settings.jsx'
+import Settings from './pages/Settings.jsx'
 
+const Router = import.meta.env.DEV ? BrowserRouter : HashRouter
 createRoot(document.getElementById('main')).render(
   <StrictMode>
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<App />} />
           <Route path='/settings' element={<Settings />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </Router>
   </StrictMode>,
 )

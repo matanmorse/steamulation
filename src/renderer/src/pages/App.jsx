@@ -1,7 +1,7 @@
 import { useState, useEffect, use } from 'react'
 import {Link} from 'react-router-dom'
 import '../styles/App.css'
-import GameCard from './GameCard'
+import GameCard from '../components/GameCard'
 
 function App() {
 
@@ -19,8 +19,7 @@ function App() {
 
   return (
     <>
-     <h1>Steamulator</h1>
-     <h3>Like steam, but for emulators.</h3>
+     <h1>Library</h1>
      <div className="game-card-grid">
       {games.map((game, index) => (
         <GameCard key={index} title={game} romPath={game}/>
