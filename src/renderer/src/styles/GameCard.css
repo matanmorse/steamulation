@@ -1,0 +1,51 @@
+
+.game-card-wrapper:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.game-card-wrapper {
+    transition: .25s all
+}
+
+.game-card-shader {
+    position: absolute; z-index: 100; top: 0; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.5);
+}
+
+.game-card-title {
+    color: whitesmoke;
+    font-size: 1.25rem;
+    font-weight: 400;
+    background-color: rgba(0,0,0,0.6);
+    width: 100%;
+    margin: 0rem;
+    text-overflow: ellipsis !important;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+.launch-button {
+    margin-top: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+    background-color: rgb(121, 177, 121);
+    color: var(--clr-surface-a20)
+}
+
+.game-card-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+    width: 175px;
+    height: 215px;
+    border-radius: 3px;
+    background-image: url('https://img.freepik.com/premium-vector/image-available-icon-set-default-missing-photo-stock-vector-symbol-black-filled-outlined-style-no-image-found-sign_268104-6708.jpg');
+    background-size:cover;
+}
+
+.game-card-loader {
+    margin:auto;
+    background-image: url('../static/icons/settings-cog.svg')
+}

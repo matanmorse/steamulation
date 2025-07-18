@@ -1,0 +1,111 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--clr-surface-a0);
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--clr-light-a0)
+}
+
+h3 {
+  color: var(--clr-primary-a50)
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--clr-primary-a0);
+  cursor: pointer;
+  transition: all 0.25s;
+
+ 
+}
+
+button:hover {
+  transform: scale(1.02);
+}
+
+button:hover:disabled {
+  transform: none;
+}
+
+button:disabled {
+  cursor:not-allowed;
+  background-color: var(--clr-primary-a30);
+  color: var(--clr-light-a10)
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  
+}
+
+* {
+  /** Theme primary colors */
+  --clr-primary-a0: #76a1d6;
+  --clr-primary-a10: #86abdb;
+  --clr-primary-a20: #96b5df;
+  --clr-primary-a30: #a6bfe4;
+  --clr-primary-a40: #b5cae8;
+  --clr-primary-a50: #c4d4ed;
+
+  /** Theme surface colors */
+  --clr-surface-a0: #1d2a36;
+  --clr-surface-a10: #333e4a;
+  --clr-surface-a20: #49535e;
+  --clr-surface-a30: #616a73;
+  --clr-surface-a40: #798189;
+  --clr-surface-a50: #93999f;
+
+  /** Theme tonal surface colors */
+  --clr-surface-tonal-a0: #253544;
+  --clr-surface-tonal-a10: #3b4857;
+  --clr-surface-tonal-a20: #515d6a;
+  --clr-surface-tonal-a30: #68727e;
+  --clr-surface-tonal-a40: #7f8892;
+  --clr-surface-tonal-a50: #989fa7;
+
+  --clr-light-a0: #FFFFFF;
+  --clr-light-a10: #F5f5f5;
+
+  --clr-danger: rgb(222, 95, 95);
+}

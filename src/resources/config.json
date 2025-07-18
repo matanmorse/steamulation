@@ -1,0 +1,15 @@
+{
+    "emulators": [
+        {
+            "name": "Citra",
+            "prettyName": "Citra",
+            "fileFormats": ["3ds"]
+        
+        },
+        {
+            "name": "MelonDS",
+            "prettyName": "MelonDS",
+            "fileFormats": ["nds"]
+        }
+    ]
+}

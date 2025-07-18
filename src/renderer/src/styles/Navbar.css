@@ -1,0 +1,17 @@
+.navbar {
+    display: flex;
+    justify-content: flex-end;
+    padding: .5rem 2rem .5rem 0rem;
+    gap: 1rem;
+    background-color: var(--clr-surface-a10);
+    border-bottom: 3px solid var(--clr-surface-a20)
+}
+
+.nav-link {
+    font-size: 24pt;
+    color: var(--clr-light-a0)
+}
+
+.nav-link:hover {
+    color: var(--clr-light-a10)
+}
