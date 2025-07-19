@@ -10,6 +10,11 @@
             "name": "MelonDS",
             "prettyName": "MelonDS",
             "fileFormats": ["nds"]
+        },
+        {
+            "name": "Rom Folder",
+            "prettyName": "Rom Folder",
+            "fileFormats": []
         }
     ]
 }

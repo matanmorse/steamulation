@@ -58,6 +58,10 @@ const setRomFolderPath = (value) => {
     settingsStore.set('romfolder-path', value)
 }
 
+const resetRomFolderPath = () => {
+    settingsStore.delete('romfolder-path')
+}
+
 const getEmulators = () => {
     const emulators = []
     config.emulators.forEach(element => {
@@ -76,16 +80,18 @@ const getEmulatorsPrettyNames = () => {
 
 const getEmulatorsConfig = () => {
     var fullConfig = config.emulators;
-    console.log(config.emulators)
+
     for (const emulator of fullConfig) {
         console.log(emulator.prettyName, getEmulatorPath(emulator.name))
         emulator.exePath = getEmulatorPath(emulator.name)
     }
+    fullConfig.find(x=>x.name==='Rom Folder').folderPath = getRomFolderPath();
+
     return fullConfig
 }
 
 export {getEmulatorPath, getRomFolderPath, setEmulatorPath, 
     setRomFolderPath, hasSettings, resetSettings, getEmulators, 
-    getEmulatorsPrettyNames, isDev, getEmulatorsConfig}
+    getEmulatorsPrettyNames, isDev, getEmulatorsConfig, resetRomFolderPath}
 
 export default config;

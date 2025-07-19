@@ -17,6 +17,7 @@ contextBridge.exposeInMainWorld('fileService', {
 contextBridge.exposeInMainWorld('configService', {
   hasSettings: () => ipcRenderer.invoke('has-settings'),
   resetSettings: (emulatorName) => ipcRenderer.invoke('reset-settings', emulatorName),
+  resetRomFolder: () => ipcRenderer.invoke('reset-romfolder'),
   getEmulatorsConfig: () => ipcRenderer.invoke('get-emulators-config')
 })
 

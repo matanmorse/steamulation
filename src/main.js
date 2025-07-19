@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'node:path'
 import { getRomsFromFolder, readFiles, selectExe, selectRomFolder } from './services/fileService.js';
 import { launchGame } from './services/launchGameService.js';
-import config, { getEmulators, getEmulatorsConfig, getEmulatorsPrettyNames, hasSettings, isDev, resetSettings } from './services/configService.js'
+import config, { getEmulators, getEmulatorsConfig, getEmulatorsPrettyNames, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -40,7 +40,7 @@ app.whenReady().then(() => {
     ipcMain.handle('has-settings', () => hasSettings())
     ipcMain.handle('reset-settings', (e, emulator) => resetSettings(emulator))
     ipcMain.handle('get-emulators-config', () => getEmulatorsConfig())
-
+    ipcMain.handle('reset-romfolder', () => resetRomFolderPath())
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })

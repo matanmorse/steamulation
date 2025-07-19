@@ -73,10 +73,17 @@
       gap: 5px;
       height: auto;
     }
+
     .exe-path-form-wrapper {
       margin-top: 2rem;
       display: flex;
       flex-direction: column;
+    }
+
+    .input-wrapper {
+      flex: 1;
+      display: flex;
+      position: relative;
     }
 
     input[type="text"] {
@@ -84,7 +91,22 @@
       background-color: var(--clr-surface-a0);
       border: 1px solid var(--clr-surface-a30);
       border-radius: 5px;
-      flex: 1;
+      width: 100%;
+      padding-right: 2rem;
+    }
+
+    .bi-x-lg {
+      position:absolute;
+      top: 12px;
+      right: 10px;
+
+      
+    }
+    .bi-x-lg:hover {
+        cursor: pointer;
+    }
+    .gray-text::placeholder {
+    color: var(--clr-light-a50) !important;
     }
     input[type="text"]::placeholder {
       color: var(--clr-light-a10);
