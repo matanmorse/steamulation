@@ -1,0 +1,47 @@
+/* TitleBar.css */
+.title-bar {
+  height: 32px;
+  background: var(--clr-surface-a0);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  -webkit-app-region: drag;
+  border-bottom: 2px solid var(--clr-surface-a10);
+}
+
+.app-icon {
+    height: 20px;
+    border-radius: 50%;
+}
+
+.title-box {
+    display:flex;
+    gap:10px;
+    align-items: center;
+}
+
+.window-controls>*:hover{
+    background-color: rgba(0,0,0,0.1);
+}
+
+.window-controls >* {
+    white-space: nowrap;
+    border-radius: 0px;
+    padding: 0 10px;
+}
+
+.window-controls {
+    height: 100%;
+}
+
+
+.window-controls button {
+  background: none;
+  border: none;
+  color: white;
+  width: 40px;
+  height: 100%;
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+}

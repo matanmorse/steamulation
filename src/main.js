@@ -11,11 +11,14 @@ dotenv.config()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+let win;
 const createWindow = () => {
     // TODO: Open to window size
-    const win = new BrowserWindow({
+    win = new BrowserWindow({
         width: 1440,
         height: 1080,
+        frame:false,
+        icon: path.join(__dirname, 'resources', 'app-icon.ico'),
         webPreferences: {
             sandbox: false,
             preload: path.join(__dirname, 'preload.js')
@@ -41,6 +44,17 @@ app.whenReady().then(() => {
     ipcMain.handle('reset-settings', (e, emulator) => resetSettings(emulator))
     ipcMain.handle('get-emulators-config', () => getEmulatorsConfig())
     ipcMain.handle('reset-romfolder', () => resetRomFolderPath())
+
+    ipcMain.handle('window-minimize', () => win.minimize());
+    ipcMain.handle('window-maximize', () => {
+    if (win.isMaximized()) {
+        win.unmaximize();
+    } else {
+        win.maximize();
+    }
+    });
+    ipcMain.handle('window-close', () => win.close());
+
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })

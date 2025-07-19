@@ -21,6 +21,11 @@ contextBridge.exposeInMainWorld('configService', {
   getEmulatorsConfig: () => ipcRenderer.invoke('get-emulators-config')
 })
 
+contextBridge.exposeInMainWorld('windowService', {
+  close: () => ipcRenderer.invoke('window-close'),
+  maximize: () => ipcRenderer.invoke('window-maximize'),
+  minimize: () => ipcRenderer.invoke('window-minimize'),
+})
 contextBridge.exposeInMainWorld('launchGameService', {
   launchGame: async (emulator, romPath) => ipcRenderer.invoke('launchGame', emulator, romPath)
 })
