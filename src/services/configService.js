@@ -27,6 +27,7 @@ const resetSettings = (emulatorName) => {
     setRomFolderPath('')
 }
 
+/* Whether the user has configured an path for all supported emulators and ROM folder*/
 const hasSettings = () => {
     return {
         citra: hasEmulator('Citra'),
@@ -35,6 +36,7 @@ const hasSettings = () => {
     }
 }
 
+/* Whether the user has configured a path for the given emulator key*/
 const hasEmulator = (name) => {
     const emulatorPath = settingsStore.get(`${name}-exe-path`)
     return !(emulatorPath == undefined )
@@ -62,6 +64,7 @@ const resetRomFolderPath = () => {
     settingsStore.delete('romfolder-path')
 }
 
+/* List of all emulators' keys*/
 const getEmulators = () => {
     const emulators = []
     config.emulators.forEach(element => {
@@ -70,6 +73,7 @@ const getEmulators = () => {
     return emulators;
 }
 
+/* List of all emulators' "pretty names" */
 const getEmulatorsPrettyNames = () => {
     const emulatorsPrettyNames = []
     config.emulators.forEach(element => {
@@ -79,15 +83,15 @@ const getEmulatorsPrettyNames = () => {
 }
 
 const getEmulatorsConfig = () => {
-    var fullConfig = config.emulators;
+    var emulators = config.emulators;
 
-    for (const emulator of fullConfig) {
-        console.log(emulator.prettyName, getEmulatorPath(emulator.name))
+    /* Add paths of emulators, if they exist */
+    for (const emulator of emulators) {
         emulator.exePath = getEmulatorPath(emulator.name)
     }
-    fullConfig.find(x=>x.name==='Rom Folder').folderPath = getRomFolderPath();
+    emulators.find(x=>x.name==='Rom Folder').folderPath = getRomFolderPath();
 
-    return fullConfig
+    return emulators
 }
 
 export {getEmulatorPath, getRomFolderPath, setEmulatorPath, 

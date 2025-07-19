@@ -1,16 +1,13 @@
 import {spawn} from 'child_process'
 import config, {getEmulatorPath, getRomFolderPath} from './configService.js'
-// const romPath = "C:\\Users\\Matan\\Downloads\\roms_Nintendo 3DS_North America_Legend Of Zelda, The - Ocarina Of Time 3D (U)\\Legend Of Zelda, The - Ocarina Of Time 3D (U).3ds"
-// const citraPath = "C:\\Users\\Matan\\AppData\\Local\\Citra\\nightly-mingw\\citra-qt.exe"
 
-
+/* Launches a game given ROM path (emulator is inferred from supported file types in the emulators config */
 const launchGame = async (emulatorName, romPath) => {
     return new Promise(resolve => {
         const fullPath = getRomFolderPath() + '\\' + romPath;
 
         const fileType = romPath.split('.')[1]
         const emulator = getEmulatorFromExtension(fileType)
-        console.log(emulator)
 
         const game = spawn(getEmulatorPath(emulator), [fullPath, '--fullscreen'])
             
@@ -29,6 +26,7 @@ const launchGame = async (emulatorName, romPath) => {
     })
 }
 
+/* Returns the first configured emulator that can run this extension*/
 const getEmulatorFromExtension = (extension) => {
      for (const element of config.emulators) {
         for (const format of element.fileFormats) {

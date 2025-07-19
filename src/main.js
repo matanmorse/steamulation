@@ -1,9 +1,9 @@
 import {app, BrowserWindow, ipcMain} from 'electron'
 import { fileURLToPath } from 'url';
 import path from 'node:path'
-import { getRomsFromFolder, readFiles, selectExe, selectRomFolder } from './services/fileService.js';
+import { getRomsFromFolder, selectExe, selectRomFolder } from './services/fileService.js';
 import { launchGame } from './services/launchGameService.js';
-import config, { getEmulators, getEmulatorsConfig, getEmulatorsPrettyNames, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
+import { getEmulatorsConfig, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -29,7 +29,6 @@ const createWindow = () => {
     else win.loadFile(path.join(__dirname, './renderer/dist/index.html'))
 }
 
-console.log(isDev())
 
 app.whenReady().then(() => {
     createWindow();
@@ -58,8 +57,6 @@ app.whenReady().then(() => {
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
-
-    console.log('config: ' + JSON.stringify(config))
 })
 
 app.on('window-all-closed', () => {
