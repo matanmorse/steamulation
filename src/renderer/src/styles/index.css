@@ -82,8 +82,8 @@ button:disabled {
 
 * {
   /** Theme primary colors */
-  --clr-primary-a0: #76a1d6;
-  --clr-primary-a10: #86abdb;
+  --clr-primary-a0: #4365df;
+  --clr-primary-a10: #3068f6;
   --clr-primary-a20: #96b5df;
   --clr-primary-a30: #a6bfe4;
   --clr-primary-a40: #b5cae8;
@@ -109,6 +109,7 @@ button:disabled {
   --clr-light-a0: #FFFFFF;
   --clr-light-a10: #F5f5f5;
   --clr-light-a30: #f2f2f2;
+  --clr-light-a40: #e7e7e7;
   --clr-light-a50: #c4c4c4;
 
   --clr-danger: rgb(222, 95, 95);

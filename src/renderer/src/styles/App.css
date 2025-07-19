@@ -15,6 +15,7 @@
   height: 100%;
   display:flex;
   flex-direction: column;
+  border-radius: 5px;
 }
 
 #root {
@@ -28,47 +29,96 @@
 .text-info {
   color: var(--clr-light-a50)
 }
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+
+.library-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  height: 100%;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.sidebar {
+  flex: 1;
+  max-width: 250px;
+  border-right: 1px solid var(--clr-surface-a10);
+  overflow: auto;
+  height: 100%;
+  text-align: start;
+  padding: 1.25rem;
+  padding-top:0rem;
+
+  .sidebar-title {
+    color: var(--clr-primary-a50);
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0rem;
   }
-  to {
-    transform: rotate(360deg);
+
+  .library-select-title {
+    font-size: 1.25rem;
+    font-weight: 400;
+    margin: 0rem;
+    color: inherit;
+  }
+
+  .select-title-wrapper {
+    color: var(--clr-light-a50);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: .2s all;
+    margin: 0.75rem 0rem 0.75rem 0rem;
+
+  }
+  
+  .select-title-wrapper:hover {
+      background-color: var(--clr-surface-tonal-a30);
+      color: var(--clr-light-a0);
+      cursor: pointer;
+    }
+  
+  .title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1rem;
+
+   
+  }
+
+  .library-select-title-selected {
+    background-color: var(--clr-primary-a10) !important;
+    color: var(--clr-light-a0)
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
+.library {
+  width: 100%;;
+  padding: 1.75rem;
+  .library-title {
+    text-align: start;
+    margin: 0rem;
+    font-size: 24pt;
+  };
 
-.card {
-  padding: 2em;
+  .library-title-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--clr-surface-a10);
+    margin-bottom: 1rem;
 }
-
-.read-the-docs {
-  color: #888;
 }
-
 
 .game-card-grid {
   display: flex;
-  justify-content: center;
-  gap: 1rem;
+  justify-content: start;
+  gap: 1.5rem;
   flex-wrap: wrap;
   max-width: 1280px;
+
 }

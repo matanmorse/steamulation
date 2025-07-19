@@ -5,6 +5,9 @@ import { getRomsFromFolder, selectExe, selectRomFolder } from './services/fileSe
 import { launchGame } from './services/launchGameService.js';
 import { getEmulatorsConfig, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import dotenv from 'dotenv'
+import startup from 'electron-squirrel-startup'; // Use import for ESM
+
+if (startup) {app.quit()}
 
 dotenv.config()
 

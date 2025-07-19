@@ -1,5 +1,5 @@
 .navbar {
-    justify-content: space-between;
+    justify-content: start;
     display: flex;
     align-items: center;
     padding: .5rem 2rem .5rem 2rem;
@@ -14,16 +14,41 @@
     gap: 1rem;
 }
 
+
+
 .nav-title {
     color: var(--clr-primary-a50);
     margin: 0rem;
 }
 
 .nav-link {
-    font-size: 24pt;
-    color: var(--clr-light-a0)
+    display: flex;
+    align-items: flex-end;
+    height: fit-content;
+    color: var(--clr-light-a40);
+    gap: 5px;   
+    border-radius: 5px;
+    padding: .25rem .5rem .25rem .5rem;
+    transition: all 0.2s;
+    h2 {
+        font-weight: 400;
+        font-size: 18pt;
+        margin: 0rem;
+        color : inherit;
+    }    
+}
+
+.nav-link-selected {
+    background-color: var(--clr-primary-a10);
+    color: var(--clr-light-a0) !important;
+    
+}
+
+.nav-link-icon {
+    font-size: 17pt;
+    color : inherit;
 }
 
 .nav-link:hover {
-    color: var(--clr-light-a10)
+    color: var(--clr-light-a50);
 }
