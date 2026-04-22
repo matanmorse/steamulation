@@ -11,16 +11,17 @@
 }
 
 .main-wrapper {
+  height: 100%;;
   display:flex;
   flex-direction: column;
   border-radius: 5px;
+  overflow:hidden;
 }
 
 #root {
   overflow: hidden;
   min-height: 80vh;
   flex: 1;
-    height: 100vh;
   text-align: center;
   background-color: var(--clr-surface-a0);
 }
@@ -41,7 +42,6 @@
   flex: 1;
   max-width: 250px;
   border-right: 1px solid var(--clr-surface-a10);
-  overflow: auto;
   height: 100%;
   text-align: start;
   padding: 1.25rem;

@@ -8,11 +8,6 @@
     border-bottom: 2px solid var(--clr-surface-a10);
 }
 
-header {
-    position: sticky;
-    top: 34px;
-}
-
 .nav-links {
     display: flex;
     gap: 1rem;
