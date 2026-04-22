@@ -9,6 +9,7 @@ import https from 'https'
 import { pipeline } from 'stream/promises';
 import Seven from 'node-7z';
 import sevenBin from '7zip-bin';
+import { glob } from "glob";
 
 const EMULATORS_DIR = path.join(app.getPath('userData'), 'emulators');
 
@@ -29,9 +30,11 @@ const AutoInstallAndConfigure = (async (emulatorName) => {
     const zipPath = path.join(installDir, `${emulatorName}.zip`);
     await downloadFile(downloadPath, zipPath);
 
+    console.log((await fs.stat(zipPath)).size)
     // Extract
     // Special case for 7z files since adm-zip doesn't support them
-    if (zipPath.endsWith('.7z')) {
+    // For some reason dolphin source is labeled as zip but is actually a 7z file, so we also check the emulator name too
+    if (zipPath.endsWith('.7z') || emulatorName === 'Dolphin' || emulatorName === 'RPCS3' || emulatorName === 'PCSX2') {
         await new Promise((resolve, reject) => {
             const stream = Seven.extractFull(zipPath, installDir, {
                 $bin: sevenBin.path7za,
@@ -50,12 +53,14 @@ const AutoInstallAndConfigure = (async (emulatorName) => {
     if (!emulator.finalExeName) {
         throw new Error(`No finalExeName specified for emulator ${emulatorName} in config file`)
     }
-    
+
+    console.log(`Looking for executable with name ${emulator.finalExeName} in folder ${installDir}`)
     // Save EXE Path to config
-    const exePath = path.join(installDir, emulator.finalExeName)
-    setEmulatorPath(emulatorName, exePath)
-    console.log(`Emulator ${emulatorName} installed and configured at path: ${exePath}`)
-    return exePath;
+    const matches = await glob(path.join(installDir, '**/', emulator.finalExeName).replace(/\\/g, '/')); // **/ means find exe in all subfolders
+    console.log(matches[0])
+    setEmulatorPath(emulatorName, matches[0])
+    console.log(`Emulator ${emulatorName} installed and configured at path: ${matches[0]}`)
+    return matches[0];
 })
 
 async function downloadFile(url, dest) {

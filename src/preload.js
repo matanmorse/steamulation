@@ -27,7 +27,7 @@ contextBridge.exposeInMainWorld('windowService', {
   minimize: () => ipcRenderer.invoke('window-minimize'),
 })
 contextBridge.exposeInMainWorld('launchGameService', {
-  launchGame: async (emulator, romPath) => ipcRenderer.invoke('launchGame', emulator, romPath)
+  launchGame: async (romPath) => ipcRenderer.invoke('launchGame', romPath)
 })
 
 contextBridge.exposeInMainWorld('autoInstallService', {

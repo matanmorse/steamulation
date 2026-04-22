@@ -1,5 +1,7 @@
 /* TitleBar.css */
 .title-bar {
+    position:sticky;
+    top:0;
   height: 32px;
   background: var(--clr-surface-a0);
   color: white;

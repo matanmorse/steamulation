@@ -35,27 +35,80 @@
         {
             "name": "RPCS3",
             "prettyName": "RPCS3",
-            "fileFormats": []
+            "fileFormats": [],
+            "installLinks": {
+                "windows": "https://github.com/RPCS3/rpcs3-binaries-win/releases/download/build-e26c80c12908c95301fc7088f778cd499a6fe1ef/rpcs3-v0.0.40-19240-e26c80c1_win64_msvc.7z"
+            },
+            "finalExeName": "rpcs3.exe"
         },
         {
             "name": "PPSSPP",
             "prettyName": "PPSSPP",
-            "fileFormats": ["iso", "cso"]
+            "fileFormats": ["iso", "cso"],
+            "installLinks": {
+                "windows": "https://github.com/hrydgard/ppsspp/releases/download/v1.20.3/PPSSPP-v1.20.3-Windows-x64.zip"
+            },
+            "finalExeName": "PPSSPPWindows64.exe"
         },
         {
             "name":"Cemu",
             "prettyName": "Cemu",
-            "fileFormats": ["wud", "wux", "rpx"]
+            "fileFormats": ["wud", "wux", "rpx"],
+            "finalExeName": "Cemu.exe"
         },
         {
-            "name": "Project64",
-            "prettyName": "Project64",
-            "fileFormats": ["n64", "z64", "v64"]
+            "name": "Ares",
+            "prettyName": "Ares",
+            "fileFormats": ["n64", "z64", "v64"],
+            "installLinks": {
+                "windows": "https://github.com/ares-emulator/ares/releases/download/v147/ares-windows-x64.zip"
+            },
+            "finalExeName": "ares.exe"
         },
         {
-            "name": "Yuzu",
-            "prettyName": "Yuzu",
-            "fileFormats": ["xci", "nsp", "nro"]
+            "name": "Citron",
+            "prettyName": "Citron",
+            "fileFormats": ["xci", "nsp", "nro"],
+            "installLinks": {
+                "windows": "https://github.com/citron-neo/CI/releases/download/nightly-windows/Citron-windows-nightly-9173bdfb2-x64-msvc.zip"
+            },
+            "finalExeName": "citron.exe"
+        },
+        {
+            "name": "PCSX2",
+            "prettyName": "PCSX2",
+            "fileFormats": [],
+            "installLinks": {
+                "windows": "https://github.com/PCSX2/pcsx2/releases/download/v2.6.3/pcsx2-v2.6.3-windows-x64-Qt.7z"
+            },
+            "finalExeName": "pcsx2-qt.exe"
+        },
+        {
+            "name": "DuckStation",
+            "prettyName": "DuckStation",
+            "fileFormats": [],
+            "installLinks": {
+                "windows": "https://github.com/stenzek/duckstation/releases/download/latest/duckstation-windows-x64-release.zip" 
+            },
+            "finalExeName": "duckstation-qt-x64-ReleaseLTCG.exe"
+        },
+        {
+            "name": "Snes9x",
+            "prettyName": "Snes9x",
+            "fileFormats": ["smc", "sfc"],
+            "installLinks": {
+                "windows": "https://dl.emulator-zone.com/download.php/emulators/snes/snes9x/snes9x-1.62.3-win32-x64.zip"
+            },
+            "finalExeName": "snes9x-x64.exe"
+        },
+        {
+            "name": "Mesen",
+            "prettyName": "Mesen",
+            "fileFormats": ["nes", "fds"],
+            "installLinks": {
+                "windows": "https://github.com/SourMesen/Mesen2/releases/download/2.1.1/Mesen_2.1.1_Windows.zip"
+            },
+            "finalExeName": "Mesen.exe"
         }
         
     ]

@@ -24,7 +24,6 @@ app.whenReady().then(() => {
 
 const resetSettings = (emulatorName) => {
     resetEmulatorPath(emulatorName)
-    setRomFolderPath('')
 }
 
 /* Whether the user has configured an path for all supported emulators and ROM folder*/
@@ -53,14 +52,18 @@ const setEmulatorPath = (name, path) => {
 }
 
 const resetEmulatorPath = (name) => {
+    console.log(`resetting path for emulator ${name}`)
     settingsStore.delete(`${name}-exe-path`)
 }
 
 const setRomFolderPath = (value) => {
+    console.log(`setting rom folder path to ${value}`)
     settingsStore.set('romfolder-path', value)
 }
 
 const resetRomFolderPath = () => {
+    console.log('resetting rom folder path')
+    throw new Error('resetRomFolderPath is not implemented yet, be careful when using it since it will delete the romfolder path without confirmation')
     settingsStore.delete('romfolder-path')
 }
 
@@ -96,6 +99,6 @@ const getEmulatorsConfig = () => {
 
 export {getEmulatorPath, getRomFolderPath, setEmulatorPath, 
     setRomFolderPath, hasSettings, resetSettings, getEmulators, 
-    getEmulatorsPrettyNames, isDev, getEmulatorsConfig, resetRomFolderPath}
+    getEmulatorsPrettyNames, isDev, getEmulatorsConfig, resetRomFolderPath, hasEmulator}
 
 export default config;

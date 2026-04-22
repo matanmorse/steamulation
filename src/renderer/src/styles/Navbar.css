@@ -5,8 +5,12 @@
     padding: .5rem 2rem .5rem 2rem;
     gap: 1rem;
     background-color: var(--clr-surface-dark);
-    border-bottom: 2px solid var(--clr-surface-a10)
-    
+    border-bottom: 2px solid var(--clr-surface-a10);
+}
+
+header {
+    position: sticky;
+    top: 34px;
 }
 
 .nav-links {

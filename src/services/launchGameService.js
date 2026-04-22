@@ -1,15 +1,16 @@
 import {spawn} from 'child_process'
-import config, {getEmulatorPath, getRomFolderPath} from './configService.js'
+import config, {getEmulatorPath, getRomFolderPath, hasEmulator} from './configService.js'
 
 /* Launches a game given ROM path (emulator is inferred from supported file types in the emulators config */
-const launchGame = async (emulatorName, romPath) => {
+const launchGame = async (romPath) => {
     return new Promise(resolve => {
         const fullPath = getRomFolderPath() + '\\' + romPath;
 
         const fileType = romPath.split('.')[1]
-        const emulator = getEmulatorFromExtension(fileType)
+        const emulators = getEmulatorsFromExtension(fileType)
+        console.log(`Launching game with rom path ${romPath} emulator path ${getEmulatorPath(emulators[0])}`)
 
-        const game = spawn(getEmulatorPath(emulator), [fullPath, '--fullscreen'])
+        const game = spawn(getEmulatorPath(emulators[0]), [fullPath])
             
         game.stdout.setEncoding('utf8')
 
@@ -26,15 +27,18 @@ const launchGame = async (emulatorName, romPath) => {
     })
 }
 
-/* Returns the first configured emulator that can run this extension*/
-const getEmulatorFromExtension = (extension) => {
-     for (const element of config.emulators) {
+/* Returns all configured emulators that can run this extension*/
+const getEmulatorsFromExtension = (extension) => {
+    const emulators = [];
+    for (const element of config.emulators) {
+        if (!element.fileFormats) continue;
         for (const format of element.fileFormats) {
             if (format === extension) {
-                return element.name;
+                emulators.push(element.name);
             }
         }
     }
+    return emulators;
 }
 
 

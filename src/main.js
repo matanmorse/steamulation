@@ -39,7 +39,7 @@ app.whenReady().then(() => {
 
     ipcMain.handle('ping', () => 'hello from main')
     ipcMain.handle('readFiles', async () => readFiles())
-    ipcMain.handle('launchGame', async (event, emulator, romPath) => launchGame(emulator, romPath))
+    ipcMain.handle('launchGame', async (event, romPath) => launchGame(romPath))
     ipcMain.handle('select-exe', async (event, emulator) => selectExe(emulator))
     ipcMain.handle('get-roms-from-folder', async () => getRomsFromFolder())
     ipcMain.handle('select-rom-folder', async () => selectRomFolder())

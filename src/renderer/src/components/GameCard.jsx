@@ -8,7 +8,7 @@ const GameCard = ({title, romPath}) => {
     const launchGame = async () => {
         setIsLoading(true)
         console.log(romPath);
-        const res = await window.launchGameService.launchGame('MelonDS', romPath)
+        const res = await window.launchGameService.launchGame(romPath)
         setIsLoading(false)
     }
 
