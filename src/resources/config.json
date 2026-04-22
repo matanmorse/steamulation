@@ -3,13 +3,20 @@
         {
             "name": "Citra",
             "prettyName": "Citra",
-            "fileFormats": ["3ds"]
-        
+            "fileFormats": ["3ds"],
+            "installLinks": {
+                "windows": "https://archive.org/download/citra-emu_202403/citra-windows-msvc-20240303-0ff3440_nightly.zip"
+            },
+            "finalExeName": "citra-qt.exe"
         },
         {
             "name": "MelonDS",
             "prettyName": "MelonDS",
-            "fileFormats": ["nds"]
+            "fileFormats": ["nds"],
+            "installLinks": {
+                "windows": "https://melonds.kuribo64.net/downloads/melonDS-1.1-windows-x86_64.zip"
+            },
+            "finalExeName": "melonDS.exe"
         },
         {
             "name": "Dolphin",
@@ -17,7 +24,8 @@
             "fileFormats": ["iso", "gcm", "wbfs"],
             "installLinks": {
                 "windows": "https://dl.dolphin-emu.org/releases/2603a/dolphin-2603a-x64.7z"
-            }
+            },
+            "finalExeName": "Dolphin.exe"
         },
         {
             "name": "Rom Folder",
