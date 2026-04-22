@@ -4,7 +4,7 @@ import EditSettingsWindow from "./EditSettingsWindow";
 import AutoInstallWindow from "./AutoInstallWindow";
 import { useEffect } from "react";
 
-const SettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator, isLoading, SetRomFolder, ResetRomFolder}) => {
+const SettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator, isLoading, SetRomFolder, ResetRomFolder, fetchEmulatorConfigs}) => {
     const SelectedEmulatorExePath = () => {
         if (!emulators.find(x=>x.name===selectedEmulator)) return undefined;
         return emulators.find(x=>x.name===selectedEmulator).exePath
@@ -44,6 +44,7 @@ const SettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator
                         <AutoInstallWindow 
                         selectedEmulator={selectedEmulator} 
                         setUserConfigureManually={setUserConfigureManually}      
+                        fetchEmulatorConfig={fetchEmulatorConfigs}
                         />
                     )}
                 </div>

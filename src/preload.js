@@ -29,3 +29,7 @@ contextBridge.exposeInMainWorld('windowService', {
 contextBridge.exposeInMainWorld('launchGameService', {
   launchGame: async (emulator, romPath) => ipcRenderer.invoke('launchGame', emulator, romPath)
 })
+
+contextBridge.exposeInMainWorld('autoInstallService', {
+  autoInstallAndConfigure: (emulatorName) => ipcRenderer.invoke('autoInstallAndConfigure', emulatorName)
+})

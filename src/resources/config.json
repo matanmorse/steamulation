@@ -14,7 +14,10 @@
         {
             "name": "Dolphin",
             "prettyName": "Dolphin",
-            "fileFormats": ["iso", "gcm", "wbfs"]
+            "fileFormats": ["iso", "gcm", "wbfs"],
+            "installLinks": {
+                "windows": "https://dl.dolphin-emu.org/releases/2603a/dolphin-2603a-x64.7z"
+            }
         },
         {
             "name": "Rom Folder",

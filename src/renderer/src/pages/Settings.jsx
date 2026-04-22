@@ -67,6 +67,7 @@ const Settings = () => {
                 selectedEmulator={selectedEmulator}
                 SetRomFolder={SetRomFolder}
                 ResetRomFolder={ResetRomFolder}
+                fetchEmulatorConfigs={fetchEmulatorConfigs}
                 />
         </div>
        
