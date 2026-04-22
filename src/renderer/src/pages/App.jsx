@@ -18,7 +18,7 @@ function App() {
   }
 
   return (
-    <div class="library-wrapper">
+    <>
       <div className="sidebar">
         <div className="title-wrapper">
           <Gamepad2 color='var(--clr-primary-a20)'/>
@@ -58,20 +58,8 @@ function App() {
             <GameCard key={index} title={game} romPath={game}/>
           ))}
         </div>
-      </div>
-      
-     {/* <h1>Library</h1>
-     <div className="game-card-grid">
-      {games.map((game, index) => (
-        <GameCard key={index} title={game} romPath={game}/>
-      ))}
-     </div>
-
-     {games.length == 0 && 
-        <h4>Add an <Link to="/settings">emulator configuration</Link> to get started</h4>
-     } */}
-     
-    </div>
+      </div>     
+    </>
   )
 }
 

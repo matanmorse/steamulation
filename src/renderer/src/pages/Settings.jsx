@@ -52,7 +52,7 @@ const Settings = () => {
 
 
     return (
-        <div class='settings-main'>
+        <>
             <SettingsSidebar
                 emulators={emulators}
                 isLoading={isLoading}
@@ -69,7 +69,7 @@ const Settings = () => {
                 ResetRomFolder={ResetRomFolder}
                 fetchEmulatorConfigs={fetchEmulatorConfigs}
                 />
-        </div>
+        </>
        
     )
 }
