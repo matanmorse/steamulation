@@ -1,5 +1,5 @@
 import '../styles/TitleBar.css'
-import appIcon from '../public/static/images/app-icon.png'
+import appIcon from '../../static/images/app-icon.png'
 const TitleBar = () => {
     return (
     <div className="title-bar">

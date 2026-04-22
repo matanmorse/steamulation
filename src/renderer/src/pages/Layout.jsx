@@ -1,5 +1,5 @@
 import {Link, Outlet} from 'react-router-dom'
-import settingsIcon from '../public/static/icons/settings-cogwheel-button.svg'
+import settingsIcon from '../../static/icons/settings-cogwheel-button.svg'
 import '../styles/Navbar.css'
 import TitleBar from '../components/TitleBar'
 import { useState } from 'react'

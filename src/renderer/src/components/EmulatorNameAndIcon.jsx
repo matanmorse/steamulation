@@ -1,7 +1,8 @@
 
 const EmulatorNameAndIcon = ({emulatorName, size=3, bold=false, otherText} ) => {
-    const logos = import.meta.glob('/src/public/static/icons/*.svg', { eager: true });
-    const path = `/src/public/static/icons/${emulatorName}-icon.svg`;
+    const logos = import.meta.glob('../../static/icons/*.svg', { eager: true });
+    console.log(logos);
+    const path = `../../static/icons/${emulatorName}-icon.svg`;
     const logo = logos[path]?.default || null;
 
     return (
