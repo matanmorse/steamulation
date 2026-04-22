@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 1.5rem;
-    gap: 1rem
+    gap: 0.5rem
   }
 
 
@@ -184,3 +184,36 @@
   gap: 10px;
   font-size: larger;
 }
+
+.auto-install-buttons-wrapper {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  justify-content: center;
+}
+
+.configure-manually-button {
+  background-color: var(--clr-surface-a30);
+}
+
+.no-emulator-configured {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.emulator-header-surface {
+  background-color: var(--clr-surface-a20);
+  padding: .5rem 1rem;
+  border-radius: 5px;
+}
+
+.auto-install-link {
+  text-decoration: underline;
+  &:hover {
+     cursor:pointer;
+  }
+}
+
+  

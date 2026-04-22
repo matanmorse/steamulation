@@ -12,9 +12,40 @@
             "fileFormats": ["nds"]
         },
         {
+            "name": "Dolphin",
+            "prettyName": "Dolphin",
+            "fileFormats": ["iso", "gcm", "wbfs"]
+        },
+        {
             "name": "Rom Folder",
             "prettyName": "Rom Folder",
             "fileFormats": []
+        },
+        {
+            "name": "RPCS3",
+            "prettyName": "RPCS3",
+            "fileFormats": []
+        },
+        {
+            "name": "PPSSPP",
+            "prettyName": "PPSSPP",
+            "fileFormats": ["iso", "cso"]
+        },
+        {
+            "name":"Cemu",
+            "prettyName": "Cemu",
+            "fileFormats": ["wud", "wux", "rpx"]
+        },
+        {
+            "name": "Project64",
+            "prettyName": "Project64",
+            "fileFormats": ["n64", "z64", "v64"]
+        },
+        {
+            "name": "Yuzu",
+            "prettyName": "Yuzu",
+            "fileFormats": ["xci", "nsp", "nro"]
         }
+        
     ]
 }

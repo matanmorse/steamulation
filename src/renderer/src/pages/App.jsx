@@ -50,7 +50,7 @@ function App() {
       </div>
       <div className="library">
         <div className="library-title-wrapper">
-          <Library/>
+          <Library size={35}/>
           <h2 className='library-title'> Your Game Library </h2>
         </div>
         <div className="game-card-grid">

@@ -39,7 +39,7 @@
 }
 
 .nav-link-selected {
-    background-color: var(--clr-primary-a10);
+    background-color: var(--clr-primary-a0);
     color: var(--clr-light-a0) !important;
     
 }

@@ -1,13 +1,12 @@
 
 .game-card-wrapper:hover {
-    transform: scale(1.025);
+    transform: scale(1.025);    
 }
 
 .game-card-wrapper {
     transition: .25s;
     width: fit-content;
     max-width: 175px;
-    height: 215px;
 }
 
 .game-card-image-wrapper {
