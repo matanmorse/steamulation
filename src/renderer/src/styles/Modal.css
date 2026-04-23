@@ -1,0 +1,56 @@
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #1e2329;
+    border: 1px solid #3d4450;
+    border-radius: 8px;
+    padding: 2rem;
+    min-width: 400px;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.no-emulator-modal h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.no-emulator-modal p {
+    color: #8f98a0;
+    margin: 0 0 1.5rem;
+    line-height: 1.5;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: flex-end;
+}
+
+.modal-buttons .btn-primary {
+    background: var(--clr-primary-a0);
+    color: #fff;
+    border: none;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-buttons .btn-secondary {
+    background: transparent;
+    color: #8f98a0;
+    border: 1px solid #3d4450;
+    padding: 0.5rem 1.25rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
