@@ -6,11 +6,14 @@ const launchGame = async (romPath) => {
     return new Promise(resolve => {
         const fullPath = getRomFolderPath() + '\\' + romPath;
 
+        // TODO: add more advanced emulator picking logic in case multiple emulators support the same file type (ex: .bin supported by melonDS and Citra)
         const fileType = romPath.split('.')[1]
         const emulators = getEmulatorsFromExtension(fileType)
-        console.log(`Launching game with rom path ${romPath} emulator path ${getEmulatorPath(emulators[0])}`)
+        const emulator = emulators[0]
+        const perEmulatorCLIArgs = config.emulators.find(x => x.name === emulator).cliArgs || []
 
-        const game = spawn(getEmulatorPath(emulators[0]), [fullPath])
+        console.log(`Launching game with rom path ${romPath} command ${getEmulatorPath(emulator).split('\\').slice(-1)[0]} ${perEmulatorCLIArgs.join(' ')} ${fullPath}`)
+        const game = spawn(getEmulatorPath(emulator), [...perEmulatorCLIArgs, fullPath])
             
         game.stdout.setEncoding('utf8')
 
@@ -22,6 +25,10 @@ const launchGame = async (romPath) => {
             console.log('Game spawned');
             resolve()
         });
+
+        game.stdout.on('data', (data) => console.log(`[From ${emulator}] ${data}`));
+        game.stderr.on('data', (data) => console.error(`[From ${emulator}] ${data}`));
+
 
         game.unref();
     })

@@ -99,7 +99,6 @@ const getEmulatorsConfig = () => {
 
 const getSupportedEmulators = (fileFormat) => {
     const res = config.fileFormats[fileFormat.replace('.','')] ?? [];
-    console.log(`getting supported emulators for file format ${fileFormat}, found ${res}`)
     return res;
 }
 

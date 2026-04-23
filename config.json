@@ -7,7 +7,8 @@
             "installLinks": {
                 "windows": "https://archive.org/download/citra-emu_202403/citra-windows-msvc-20240303-0ff3440_nightly.zip"
             },
-            "finalExeName": "citra-qt.exe"
+            "finalExeName": "citra-qt.exe",
+            "cliArgs": ["-f", "-g"]
         },
         {
             "name": "MelonDS",
@@ -16,7 +17,8 @@
             "installLinks": {
                 "windows": "https://melonds.kuribo64.net/downloads/melonDS-1.1-windows-x86_64.zip"
             },
-            "finalExeName": "melonDS.exe"
+            "finalExeName": "melonDS.exe",
+            "cliArgs": ["--fullscreen"]
         },
         {
             "name": "Dolphin",
@@ -63,7 +65,8 @@
             "installLinks": {
                 "windows": "https://github.com/ares-emulator/ares/releases/download/v147/ares-windows-x64.zip"
             },
-            "finalExeName": "ares.exe"
+            "finalExeName": "ares.exe",
+            "cliArgs": ["--no-file-prompt", "--fullscreen"]
         },
         {
             "name": "Citron",
