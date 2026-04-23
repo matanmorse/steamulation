@@ -1,6 +1,6 @@
 import EmulatorNameAndIcon from "../EmulatorNameAndIcon"
 
-const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator, isLoading, SetRomFolder, ResetRomFolder, SelectedEmulatorExePath, RomFolderPath, setUserConfigureManually}) => {
+const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator, SetRomFolder, ResetRomFolder, SelectedEmulatorExePath, RomFolderPath, setUserConfigureManually}) => {
     return (
     <form className="settings-form">
         <EmulatorNameAndIcon emulatorName={selectedEmulator} size={4.5} bold={true} otherText={"Emulator Settings"}/>
@@ -9,15 +9,14 @@ const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmul
             <>
             <label>Emulator Executable Path:</label>
             <div className="exe-input-wrapper">
-                {!isLoading &&
-                    <div className="input-wrapper">
-                        <input type="text" readOnly class={"current-exe-path " + (SelectedEmulatorExePath() === undefined && "gray-text")}
-                        placeholder={ SelectedEmulatorExePath() ?? "Click browse to manually configure path for " + selectedEmulator }
-                        >
-                        </input>
-                        <i className="bi bi-x-lg" onClick={(e) => ResetEmulator(e, selectedEmulator)}></i>
-                    </div>
-                }
+                <div className="input-wrapper">
+                    <input type="text" readOnly class={"current-exe-path " + (SelectedEmulatorExePath() === undefined && "gray-text")}
+                    placeholder={ SelectedEmulatorExePath() ?? "Click browse to manually configure path for " + selectedEmulator }
+                    >
+                    </input>
+                    <i className="bi bi-x-lg" onClick={(e) => ResetEmulator(e, selectedEmulator)}></i>
+                </div>
+                
                 <button class="exe-input-button" onClick={(e) => SetEmulator(e, selectedEmulator) }><i class="bi bi-folder" style={{fontSize: '16pt'}}></i> Browse</button>
             </div>
             {SelectedEmulatorExePath() !== undefined ? 

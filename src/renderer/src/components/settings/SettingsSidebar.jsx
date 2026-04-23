@@ -1,6 +1,9 @@
+import { useEmulator } from '../../contexts/SharedContext'
 import '../../styles/Settings.css'
 import EmulatorNameAndIcon from '../EmulatorNameAndIcon'
-const SettingsSidebar = ({emulators, isLoading, selectedEmulator, setSelectedEmulator}) => {
+const SettingsSidebar = ({isLoading, selectedEmulator, setSelectedEmulator}) => {
+    const {emulators} = useEmulator();
+    
     return (
         <div class="sidebar">
                 <div className="sidebar-title-wrapper">

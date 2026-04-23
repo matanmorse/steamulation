@@ -12,6 +12,10 @@
   border-bottom: 2px solid var(--clr-surface-a10);
 }
 
+.title {
+    color: var(--clr-surface-a50);
+}
+
 .app-icon {
     height: 20px;
     border-radius: 50%;

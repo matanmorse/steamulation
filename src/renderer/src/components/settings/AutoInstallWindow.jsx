@@ -1,13 +1,16 @@
 import { useState } from "react";
 import EmulatorNameAndIcon from "../EmulatorNameAndIcon";
 import { BarLoader } from "react-spinners";
-const AutoInstallWindow = ({selectedEmulator, setUserConfigureManually, fetchEmulatorConfig}) => { 
-    const [isInstalling, setIsInstalling] = useState(false);
+import { useEmulator } from "../../contexts/SharedContext";
 
+const AutoInstallWindow = ({selectedEmulator, setUserConfigureManually}) => { 
+    const [isInstalling, setIsInstalling] = useState(false);
+    const {refetchEmulators} = useEmulator();
+    
     const DoAutoInstallation = async () => {    
         setIsInstalling(true);
         await window.autoInstallService.autoInstallAndConfigure(selectedEmulator)
-        await fetchEmulatorConfig();
+        await refetchEmulators();
         setIsInstalling(false);
     }
 

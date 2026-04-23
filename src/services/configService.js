@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const configRootPath = path.resolve(__dirname,'../resources', 'config.json')
+const configRootPath = path.resolve(__dirname,'../../', 'config.json')
 
 const config = JSON.parse(readFileSync(configRootPath, 'utf-8'));
 

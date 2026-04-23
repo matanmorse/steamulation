@@ -3,8 +3,11 @@ import EmulatorNameAndIcon from "../EmulatorNameAndIcon";
 import EditSettingsWindow from "./EditSettingsWindow";
 import AutoInstallWindow from "./AutoInstallWindow";
 import { useEffect } from "react";
+import { useEmulator } from "../../contexts/SharedContext";
 
-const SettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator, isLoading, SetRomFolder, ResetRomFolder, fetchEmulatorConfigs}) => {
+const SettingsWindow = ({selectedEmulator, ResetEmulator, SetEmulator, SetRomFolder, ResetRomFolder, fetchEmulatorConfigs}) => {
+    const {emulators} = useEmulator();
+
     const SelectedEmulatorExePath = () => {
         if (!emulators.find(x=>x.name===selectedEmulator)) return undefined;
         return emulators.find(x=>x.name===selectedEmulator).exePath
@@ -31,10 +34,8 @@ const SettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator
                     {userConfigureManually || SelectedEmulatorExePath() !== undefined || (RomFolderPath() !== undefined && selectedEmulator === 'Rom Folder') ? (
                         <EditSettingsWindow 
                             selectedEmulator={selectedEmulator}
-                            emulators={emulators}
                             ResetEmulator={ResetEmulator}
                             SetEmulator={SetEmulator}
-                            isLoading={isLoading}
                             SetRomFolder={SetRomFolder}
                             ResetRomFolder={ResetRomFolder}
                             SelectedEmulatorExePath={SelectedEmulatorExePath}
@@ -44,7 +45,6 @@ const SettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator
                         <AutoInstallWindow 
                         selectedEmulator={selectedEmulator} 
                         setUserConfigureManually={setUserConfigureManually}      
-                        fetchEmulatorConfig={fetchEmulatorConfigs}
                         />
                     )}
                 </div>
