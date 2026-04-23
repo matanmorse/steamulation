@@ -97,8 +97,15 @@ const getEmulatorsConfig = () => {
     return emulators
 }
 
+const getSupportedEmulators = (fileFormat) => {
+    const res = config.fileFormats[fileFormat.replace('.','')] ?? [];
+    console.log(`getting supported emulators for file format ${fileFormat}, found ${res}`)
+    return res;
+}
+
 export {getEmulatorPath, getRomFolderPath, setEmulatorPath, 
     setRomFolderPath, hasSettings, resetSettings, getEmulators, 
-    getEmulatorsPrettyNames, isDev, getEmulatorsConfig, resetRomFolderPath, hasEmulator}
+    getEmulatorsPrettyNames, isDev, getEmulatorsConfig, resetRomFolderPath, hasEmulator,
+    getSupportedEmulators}
 
 export default config;

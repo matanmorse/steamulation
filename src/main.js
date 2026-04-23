@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import path from 'node:path'
 import { getRomsFromFolder, selectExe, selectRomFolder } from './services/fileService.js';
 import { launchGame } from './services/launchGameService.js';
-import { getEmulatorsConfig, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
+import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
 import dotenv from 'dotenv'
 import startup from 'electron-squirrel-startup'; // Use import for ESM
@@ -48,6 +48,7 @@ app.whenReady().then(() => {
     ipcMain.handle('get-emulators-config', () => getEmulatorsConfig())
     ipcMain.handle('reset-romfolder', () => resetRomFolderPath())
     ipcMain.handle('autoInstallAndConfigure', async (e, emulatorName) => AutoInstallAndConfigure(emulatorName))
+    ipcMain.handle('get-supported-emulators', (e, fileFormat) => getSupportedEmulators(fileFormat))
 
     ipcMain.handle('window-minimize', () => win.minimize());
     ipcMain.handle('window-maximize', () => {

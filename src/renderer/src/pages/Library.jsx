@@ -1,14 +1,16 @@
 import { useState, useEffect, use } from 'react'
 import {Link} from 'react-router-dom'
-import {Library, Clock, Star, Gamepad2} from 'lucide-react'
+import {Clock, Star, Gamepad2} from 'lucide-react'
+import {Library as LibraryIcon} from 'lucide-react'
 import '../styles/App.css'
 import GameCard from '../components/GameCard'
 
 function App() {
   const [games, setGames] = useState([])
   const [selectedTab, setSelectedTab] = useState('All Games')
+
   useEffect(() => {
-      fetchGames();  
+      fetchGames();
     }, []
   )
 
@@ -28,7 +30,7 @@ function App() {
 
           <div className={"select-title-wrapper " + (selectedTab === 'All Games' && 'library-select-title-selected')}
           onClick={() => setSelectedTab('All Games')}>
-            <Library/>
+            <LibraryIcon/>
             <h4 className="library-select-title">
               All Games</h4>
           </div>
@@ -50,7 +52,7 @@ function App() {
       </div>
       <div className="library">
         <div className="library-title-wrapper">
-          <Library size={35}/>
+          <LibraryIcon size={35}/>
           <h2 className='library-title'> Your Game Library </h2>
         </div>
         <div className="game-card-grid">
@@ -58,7 +60,7 @@ function App() {
             <GameCard key={index} title={game} romPath={game}/>
           ))}
         </div>
-      </div>     
+      </div>
     </>
   )
 }

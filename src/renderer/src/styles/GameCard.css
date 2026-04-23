@@ -7,6 +7,7 @@
     transition: .25s;
     width: fit-content;
     max-width: 175px;
+    position: relative; /* For icon list absolute positioning */
 }
 
 .game-card-image-wrapper {

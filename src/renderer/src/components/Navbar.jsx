@@ -5,9 +5,9 @@ const Navbar = () => {
     const location = useLocation();
     return (
     <header>
-                <nav class="navbar">
+                <nav className="navbar">
                     <div>
-                        <h3 class="nav-title">Steamulator</h3>
+                        <h3 className="nav-title">Steamulator</h3>
                     </div>
                     <div className="nav-links">
                         <Link
@@ -19,7 +19,7 @@ const Navbar = () => {
                         <Link 
                         className={"nav-link " + (location.pathname === '/settings' && 'nav-link-selected')}
                         id="Settings" to="/settings">
-                            <i class='bi bi-gear-fill nav-link-icon' />
+                            <i className='bi bi-gear-fill nav-link-icon' />
                             <h2>Settings</h2>
                         </Link>
                     </div>
