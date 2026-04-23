@@ -1,36 +1,45 @@
 import {contextBridge, ipcRenderer} from 'electron'
 
+const invoke = async (channel, ...args) => {
+    const result = await ipcRenderer.invoke(channel, ...args);
+    if (result?.error) {
+        throw { message: result.error, stack: result.stack };
+    }
+    return result?.data;
+};
+
 contextBridge.exposeInMainWorld('versions', {
   node: () => process.versions.node,
   chrome: () => process.versions.chrome,
   electron: () => process.versions.electron,
-  ping: () => ipcRenderer.invoke('ping'),
+  ping: () => invoke('ping'),
 })
 
 contextBridge.exposeInMainWorld('fileService', {
-  readFiles: () => ipcRenderer.invoke('readFiles'),
-  selectExe: async (emulatorName) => await ipcRenderer.invoke('select-exe', emulatorName),
-  selectRomFolder: async () => ipcRenderer.invoke('select-rom-folder'),
-  getRomsFromFolder: async () => ipcRenderer.invoke('get-roms-from-folder')
+  readFiles: () => invoke('readFiles'),
+  selectExe: async (emulatorName) => await invoke('select-exe', emulatorName),
+  selectRomFolder: async () => invoke('select-rom-folder'),
+  getRomsFromFolder: async () => invoke('get-roms-from-folder')
 })
 
 contextBridge.exposeInMainWorld('configService', {
-  hasSettings: () => ipcRenderer.invoke('has-settings'),
-  resetSettings: (emulatorName) => ipcRenderer.invoke('reset-settings', emulatorName),
-  resetRomFolder: () => ipcRenderer.invoke('reset-romfolder'),
-  getEmulatorsConfig: () => ipcRenderer.invoke('get-emulators-config'),
-  getSupportedEmulators: (fileFormat) => ipcRenderer.invoke('get-supported-emulators', fileFormat)
+  hasSettings: () => invoke('has-settings'),
+  resetSettings: (emulatorName) => invoke('reset-settings', emulatorName),
+  resetRomFolder: () => invoke('reset-romfolder'),
+  getEmulatorsConfig: () => invoke('get-emulators-config'),
+  getSupportedEmulators: (fileFormat) => invoke('get-supported-emulators', fileFormat)
 })
 
 contextBridge.exposeInMainWorld('windowService', {
-  close: () => ipcRenderer.invoke('window-close'),
-  maximize: () => ipcRenderer.invoke('window-maximize'),
-  minimize: () => ipcRenderer.invoke('window-minimize'),
+  close: () => invoke('window-close'),
+  maximize: () => invoke('window-maximize'),
+  minimize: () => invoke('window-minimize'),
 })
+
 contextBridge.exposeInMainWorld('launchGameService', {
-  launchGame: async (romPath) => ipcRenderer.invoke('launchGame', romPath)
+  launchGame: async (romPath) => invoke('launchGame', romPath)
 })
 
 contextBridge.exposeInMainWorld('autoInstallService', {
-  autoInstallAndConfigure: (emulatorName) => ipcRenderer.invoke('autoInstallAndConfigure', emulatorName)
+  autoInstallAndConfigure: (emulatorName) => invoke('autoInstallAndConfigure', emulatorName)
 })

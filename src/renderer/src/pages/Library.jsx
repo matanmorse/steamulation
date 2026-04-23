@@ -16,6 +16,7 @@ function App() {
 
   const fetchGames = async () => {
     const res = await window.fileService.getRomsFromFolder();
+    console.log(res);
     setGames(res)
   }
 

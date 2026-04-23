@@ -9,6 +9,10 @@
     z-index: 1000;
 }
 
+/* Specific styling for error modals to fit stack */
+.modal-content:has(.error-modal){
+    max-width: 1250px;
+}
 .modal-content {
     background: #1e2329;
     border: 1px solid #3d4450;
@@ -19,13 +23,13 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 
-.no-emulator-modal h2 {
+.no-emulator-modal h2, .error-modal h2 {
     margin: 0 0 0.5rem;
     font-size: 1.2rem;
     color: #fff;
 }
 
-.no-emulator-modal p {
+.no-emulator-modal p, .error-modal p {
     color: #8f98a0;
     margin: 0 0 1.5rem;
     line-height: 1.5;

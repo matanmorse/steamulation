@@ -36,29 +36,39 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     createWindow();
+    const handleIpc = (channel, handler) => {
+        ipcMain.handle(channel, async (event, ...args) => {
+            try {
+                return { data: await handler(event, ...args), error: null };
+            } catch (error) {
+                console.log(error)
+                return { data: null, error: error.message || 'An error occurred', stack: error.stack};
+            }
+        });
+    };
+    
+    handleIpc('ping', () => 'hello from main')
+    handleIpc('readFiles', async () => readFiles())
+    handleIpc('launchGame', async (event, romPath) => launchGame(romPath))
+    handleIpc('select-exe', async (event, emulator) => selectExe(emulator))
+    handleIpc('get-roms-from-folder', async () => getRomsFromFolder())
+    handleIpc('select-rom-folder', async () => selectRomFolder())
+    handleIpc('has-settings', () => hasSettings())
+    handleIpc('reset-settings', (e, emulator) => resetSettings(emulator))
+    handleIpc('get-emulators-config', () => getEmulatorsConfig())
+    handleIpc('reset-romfolder', () => resetRomFolderPath())
+    handleIpc('autoInstallAndConfigure', async (e, emulatorName) => AutoInstallAndConfigure(emulatorName))
+    handleIpc('get-supported-emulators', (e, fileFormat) => getSupportedEmulators(fileFormat))
 
-    ipcMain.handle('ping', () => 'hello from main')
-    ipcMain.handle('readFiles', async () => readFiles())
-    ipcMain.handle('launchGame', async (event, romPath) => launchGame(romPath))
-    ipcMain.handle('select-exe', async (event, emulator) => selectExe(emulator))
-    ipcMain.handle('get-roms-from-folder', async () => getRomsFromFolder())
-    ipcMain.handle('select-rom-folder', async () => selectRomFolder())
-    ipcMain.handle('has-settings', () => hasSettings())
-    ipcMain.handle('reset-settings', (e, emulator) => resetSettings(emulator))
-    ipcMain.handle('get-emulators-config', () => getEmulatorsConfig())
-    ipcMain.handle('reset-romfolder', () => resetRomFolderPath())
-    ipcMain.handle('autoInstallAndConfigure', async (e, emulatorName) => AutoInstallAndConfigure(emulatorName))
-    ipcMain.handle('get-supported-emulators', (e, fileFormat) => getSupportedEmulators(fileFormat))
-
-    ipcMain.handle('window-minimize', () => win.minimize());
-    ipcMain.handle('window-maximize', () => {
+    handleIpc('window-minimize', () => win.minimize());
+    handleIpc('window-maximize', () => {
     if (win.isMaximized()) {
         win.unmaximize();
     } else {
         win.maximize();
     }
     });
-    ipcMain.handle('window-close', () => win.close());
+    handleIpc('window-close', () => win.close());
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()

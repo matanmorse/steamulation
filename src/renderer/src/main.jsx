@@ -6,7 +6,9 @@ import { BrowserRouter, HashRouter, Route, Routes } from 'react-router-dom'
 import Layout from './pages/Layout.jsx'
 import Settings from './pages/Settings.jsx'
 import { EmulatorProvider } from './contexts/SharedContext.jsx'
-import { ModalProvider } from './contexts/ModalContext.jsx'
+import { ModalProvider, useModal } from './contexts/ModalContext.jsx'
+import ErrorModal from './modals/ErrorModal.jsx'
+
 
 const Router = import.meta.env.DEV ? BrowserRouter : HashRouter
 createRoot(document.getElementById('main')).render(
