@@ -59,6 +59,7 @@ const GameCard = ({title, romPath, metadata}) => {
                 </button>
             </div>
             </div>
+
         </div>
     </>
     )

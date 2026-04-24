@@ -6,6 +6,11 @@ import dotenv from 'dotenv'
 import { spawn } from "node:child_process";
 import { getRomPathFromFilename } from "./fileService.js";
 import SGDB from "steamgriddb";
+import igdb from 'igdb-api-node';
+import apicalypse from 'apicalypse'
+import { clearCache } from "../caching.js";
+import { clear } from "node:console";
+import { title } from "node:process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -74,10 +79,39 @@ const fileEndingsToSystemID = {
     "mdf": [12],
 }
 
+const IGDB_PLATFORM_IDS = {
+    2: 4,    // N64
+    3: 58,   // SNES
+    4: 33,   // Game Boy
+    5: 24,   // GBA
+    6: 22,   // GBC
+    7: 18,   // NES
+    12: 57,  // PS1
+    16: 21,  // GameCube
+    18: 20,  // NDS
+    19: 5,   // Wii
+    20: 41,  // Wii U
+    21: 8,   // PS2
+    41: 38,  // PSP
+    62: 37,  // 3DS
+}
 dotenv.config({quiet: true})
 
 const metadataCache = new ElectronStore();
-const client = new SGDB(process.env.STEAMGRIDDB_API_KEY)
+const SGBDClient = new SGDB(process.env.STEAMGRIDDB_API_KEY)
+
+// First, get an access token
+const tokenRes = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.IGDB_CLIENT_ID}&client_secret=${process.env.IGDB_CLIENT_SECRET}&grant_type=client_credentials`, { method: 'POST' });
+const { access_token } = await tokenRes.json();
+// configure IGDB data with token and client id
+const IGDBQueryData = {
+    method: 'post',
+    baseURL: 'https://api.igdb.com/v4',
+    headers: {
+        'Client-ID': process.env.IGDB_CLIENT_ID,
+        'Authorization': `Bearer ${access_token}`,
+    }
+}
 
 // auth for RA_API
 const authorization = buildAuthorization({
@@ -105,10 +139,14 @@ const getMetadata = async (filename) => {
         game = {title: titleFromFilename, coverArt: await getCoverArtFromName(titleFromFilename)}
     }
 
+    // TODO: LOOP THROUGH SYSTEM IDS
+    const igdb_metadata = await getIGBBMetadata(game.title, systemIds[0])
+    if (igdb_metadata === undefined) console.log('[IGDB Metadata] IGDB data for ' + title + ' was undefined.')
+    
     // if we found a title, get cover art from SteamGridDB
     const coverArt = await getCoverArtFromName(game.title);
     game['coverArt'] = coverArt;
-
+    game = {...game, ...igdb_metadata}
     return game;
 }
 
@@ -175,12 +213,29 @@ const getGameLists = async (systemIds) => {
 
 /* use steamgriddb to search for the title, then get the cover art for it */
 const getCoverArtFromName = async (title) => {
-    const games = await client.searchGame(title);
+    const games = await SGBDClient.searchGame(title);
 
     // pick first result-- most accurate
     const game = games[0];
-    const grids = await client.getGridsById(game.id, undefined, undefined, undefined, undefined, 'false', 'false')
+    const grids = await SGBDClient.getGridsById(game.id, undefined, undefined, undefined, undefined, 'false', 'false')
     return grids[0].url;
 }
 
+const getIGBBMetadata = async (title, systemId) => {
+    const IGDBSystemId = IGDB_PLATFORM_IDS[systemId];
+    console.log(`[IGDB Metadata] Getting IGDB entry for system ${systemId} with IGDB system ${IGDBSystemId} and name ${title}`);
+    const response = await apicalypse(IGDBQueryData)
+        .fields('name, cover, summary, artworks, first_release_date, game_type, total_rating_count, platforms')
+        .search(title)
+        .limit(10)
+        .where('game_type = 0')
+        .request('/games')
+    const resData = response.data;
+    // return response with highest rating count, biasing to more popular titles
+    const sortedData = resData.sort((a, b) => (b.total_rating_count ?? 0) - (a.total_rating_count ?? 0));
+    console.log(sortedData)
+    return sortedData[0];
+}
+
+clearCache(metadataCache, 'metadata');
 export {getMetadata, metadataCache}

@@ -30,6 +30,7 @@ const getMetadata = async () => {
     })
   );
   setMetadata(metadatas);
+  console.log(metadatas);
 };
 
   const fetchGames = async () => {
