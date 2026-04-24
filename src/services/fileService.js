@@ -5,8 +5,9 @@ import path from 'path';
 
 /* Gets all files that can be run on a supported emulator in the ROM Folder (as configured in SetRomFolder)*/
 const getRomsFromFolder = async () => {
-    if (getRomFolderPath() === '') return []
-    return (await fs.readdir(getRomFolderPath())).filter(file => isSupportedFileType(file));
+    const romFolderPath = getRomFolderPath();
+    if (romFolderPath === '' || !romFolderPath) return []
+    return (await fs.readdir(romFolderPath)).filter(file => isSupportedFileType(file));
 }
 
 const getRomPathFromFilename = async (filename) => {
