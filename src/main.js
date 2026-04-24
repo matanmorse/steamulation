@@ -7,6 +7,7 @@ import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRom
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
 import dotenv from 'dotenv'
 import startup from 'electron-squirrel-startup'; // Use import for ESM
+import { getMetadata } from './services/metadataService.js';
 
 if (startup) {app.quit()}
 
@@ -14,6 +15,8 @@ dotenv.config()
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+await getMetadata('C:\\Users\\Matan\\Desktop\\EmulatorRoms\\diamond.nds')
 
 let win;
 const createWindow = () => {
@@ -24,7 +27,7 @@ const createWindow = () => {
         frame:false,
         icon: path.join(__dirname, 'resources', 'app-icon.ico'),
         webPreferences: {
-            sandbox: false,
+            contextIsolation: true,
             preload: path.join(__dirname, 'preload.js')
         }
     })

@@ -1,0 +1,20 @@
+{
+  "name": "steamulator",
+  "version": "1.0.0",
+  "main": "src/main.js",
+  "dependencies": {
+    "@retroachievements/api": "^2.10.0",
+    "7zip-bin": "^5.2.0",
+    "adm-zip": "^0.5.17",
+    "dotenv": "^17.4.2",
+    "electron": "^41.3.0",
+    "electron-forge": "^5.2.4",
+    "electron-squirrel-startup": "^1.0.1",
+    "electron-store": "^11.0.2",
+    "glob": "^13.0.6",
+    "node-7z": "^3.0.0"
+  },
+  "scripts": {
+    "start": "electron ."
+  }
+}

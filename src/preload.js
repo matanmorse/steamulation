@@ -1,4 +1,4 @@
-import {contextBridge, ipcRenderer} from 'electron'
+const {contextBridge, ipcRenderer} = require('electron') 
 
 const invoke = async (channel, ...args) => {
     const result = await ipcRenderer.invoke(channel, ...args);
