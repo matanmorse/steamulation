@@ -6,10 +6,10 @@
 .game-card-wrapper {
     display: flex;
     flex-direction: column;
-    height: 250px;
+    height: 270px;
     transition: .25s;
     width: fit-content;
-    max-width: 175px;
+    width: 180px;
     position: relative; /* For icon list absolute positioning */
 }
 

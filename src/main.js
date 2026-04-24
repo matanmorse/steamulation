@@ -7,7 +7,8 @@ import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRom
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
 import dotenv from 'dotenv'
 import startup from 'electron-squirrel-startup'; // Use import for ESM
-import { getMetadata } from './services/metadataService.js';
+import { getMetadata, metadataCache } from './services/metadataService.js';
+import withCache, { clearCache } from './caching.js';
 
 if (startup) {app.quit()}
 
@@ -15,7 +16,6 @@ dotenv.config({quiet: true})
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-
 
 let win;
 const createWindow = () => {
@@ -61,7 +61,7 @@ app.whenReady().then(() => {
     handleIpc('reset-romfolder', () => resetRomFolderPath())
     handleIpc('autoInstallAndConfigure', async (e, emulatorName) => AutoInstallAndConfigure(emulatorName))
     handleIpc('get-supported-emulators', (e, fileFormat) => getSupportedEmulators(fileFormat))
-    handleIpc('get-metadata', (e, fileName) => getMetadata(fileName))
+    handleIpc('get-metadata', (e, fileName) => withCache(metadataCache, 'metadata', fileName, () => getMetadata(fileName)))
     handleIpc('window-minimize', () => win.minimize());
     handleIpc('window-maximize', () => {
     if (win.isMaximized()) {

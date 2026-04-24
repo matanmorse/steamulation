@@ -16,17 +16,15 @@ const GameCard = ({title, romPath, metadata}) => {
 
     const titleWithMetadata = metadata ? metadata.title : title;
     const launchGame = async () => {
-        if (!hasConfiguredEmulator) {openNoEmulatorModal(); return;}
-        const res = await window.launchGameService.launchGame(romPath)
-    }
-
-    const openNoEmulatorModal = () => {
-        showModal(
+        if (!hasConfiguredEmulator) {        
+            showModal(
             <NoEmulatorModal 
                 fileExtension={fileExtension}
                 hideModal={hideModal}
-            />
-        )
+            />); 
+            return;
+        }
+        const res = await window.launchGameService.launchGame(romPath)
     }
 
     /* Get supported emulators based on file extension from configService */
@@ -46,12 +44,11 @@ const GameCard = ({title, romPath, metadata}) => {
             setHasConfiguredEmulator(hasConfigured);
         });
     }, [supportedEmulators])
+    
     return (
     <>
         <div className="game-card-wrapper" >
             <EmulatorIconList emulatorNameList={supportedEmulators}/>
-
-            
             <div className="game-card-image-wrapper" style={{backgroundImage: metadata && `url(${metadata.coverArt})`}}>
                 {isLoading && <ClipLoader class="game-card-loader" size={60} color='blue'/>}
                 <div className="game-info">
@@ -62,7 +59,6 @@ const GameCard = ({title, romPath, metadata}) => {
                 </button>
             </div>
             </div>
-            
         </div>
     </>
     )
