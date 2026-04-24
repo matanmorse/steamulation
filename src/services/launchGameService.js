@@ -9,9 +9,11 @@ const launchGame = async (romPath) => {
         // TODO: add more advanced emulator picking logic in case multiple emulators support the same file type (ex: .bin supported by melonDS and Citra)
         const fileType = romPath.split('.')[1]
         const emulators = getEmulatorsFromExtension(fileType)
-        const emulator = emulators[0]
+        const emulator = emulators.find(e => hasEmulator(e)); // pick first configured emulator
+
         const perEmulatorCLIArgs = config.emulators.find(x => x.name === emulator).cliArgs || []
 
+        console.log(emulator)
         console.log(`Launching game with rom path ${romPath} command ${getEmulatorPath(emulator).split('\\').slice(-1)[0]} ${perEmulatorCLIArgs.join(' ')} ${fullPath}`)
         const game = spawn(getEmulatorPath(emulator), [...perEmulatorCLIArgs, fullPath])
             

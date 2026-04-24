@@ -11,7 +11,7 @@ import { getMetadata } from './services/metadataService.js';
 
 if (startup) {app.quit()}
 
-dotenv.config()
+dotenv.config({quiet: true})
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

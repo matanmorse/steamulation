@@ -102,7 +102,8 @@
             "installLinks": {
                 "windows": "https://dl.emulator-zone.com/download.php/emulators/snes/snes9x/snes9x-1.62.3-win32-x64.zip"
             },
-            "finalExeName": "snes9x-x64.exe"
+            "finalExeName": "snes9x-x64.exe",
+            "cliArgs": [""]
         },
         {
             "name": "Mesen",

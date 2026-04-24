@@ -74,7 +74,7 @@ const fileEndingsToSystemID = {
     "mdf": [12],
 }
 
-dotenv.config()
+dotenv.config({quiet: true})
 
 const metadataCache = new ElectronStore();
 const client = new SGDB(process.env.STEAMGRIDDB_API_KEY)
@@ -87,8 +87,15 @@ const authorization = buildAuthorization({
 
 const getMetadata = async (filename) => {
     if (!filename) return undefined;
-    const romPath = await getRomPathFromFilename(filename);
 
+    // first, check cache
+    var romMetadataCache = metadataCache.get('metadata', undefined);
+    if (!romMetadataCache) romMetadataCache = {}
+    if (Object.keys(romMetadataCache).includes(filename))  return romMetadataCache[filename];
+    
+    // otherwise, get metadata from API
+    console.log('Metadata cache miss for ' + filename);
+    const romPath = await getRomPathFromFilename(filename);
     const systemIds = fileEndingsToSystemID[romPath.split('.').at(-1)];
     const [gameLists, hashes] = await Promise.all([
         getGameLists(systemIds),
@@ -107,7 +114,12 @@ const getMetadata = async (filename) => {
     // if we found a title, get cover art from SteamGridDB
     const coverArt = await getCoverArtFromName(game.title);
     game['coverArt'] = coverArt;
-    console.log(game);
+
+    // add to cache
+    console.log('[Metadata Service] Adding metadata cache entry for ' + filename)
+    // console.log(game);
+    romMetadataCache[filename] = game;
+    metadataCache.set('metadata', romMetadataCache);
 
     return game;
 }

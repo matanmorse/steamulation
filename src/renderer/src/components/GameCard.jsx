@@ -17,9 +17,7 @@ const GameCard = ({title, romPath, metadata}) => {
     const titleWithMetadata = metadata ? metadata.title : title;
     const launchGame = async () => {
         if (!hasConfiguredEmulator) {openNoEmulatorModal(); return;}
-        setIsLoading(true)
         const res = await window.launchGameService.launchGame(romPath)
-        setIsLoading(false)
     }
 
     const openNoEmulatorModal = () => {
@@ -52,11 +50,9 @@ const GameCard = ({title, romPath, metadata}) => {
     <>
         <div className="game-card-wrapper" >
             <EmulatorIconList emulatorNameList={supportedEmulators}/>
-            {!metadata && <h6 className="game-card-title">
-                        {titleWithMetadata}
-            </h6>}
+
             
-            <div className="game-card-image-wrapper" style={{backgroundImage: metadata ? `url(${metadata.coverArt})` : `url(https://placehold.co/25x25/3c1a2b/ffffff?text=${title})`}}>
+            <div className="game-card-image-wrapper" style={{backgroundImage: metadata && `url(${metadata.coverArt})`}}>
                 {isLoading && <ClipLoader class="game-card-loader" size={60} color='blue'/>}
                 <div className="game-info">
             

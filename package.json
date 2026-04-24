@@ -2,6 +2,7 @@
   "name": "steamulator",
   "version": "1.0.0",
   "main": "src/main.js",
+  "type": "module",
   "dependencies": {
     "@retroachievements/api": "^2.10.0",
     "7zip-bin": "^5.2.0",
