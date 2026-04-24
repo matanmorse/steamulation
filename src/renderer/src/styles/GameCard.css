@@ -4,6 +4,9 @@
 }
 
 .game-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
     transition: .25s;
     width: fit-content;
     max-width: 175px;
@@ -11,8 +14,13 @@
 }
 
 .game-card-image-wrapper {
-    height: 175px;;
+    flex:1;
+    background-position: center;
+    background-size:cover;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .game-card-loader {
@@ -38,19 +46,25 @@
         cursor: pointer;
 }
 .game-card-title {
+    position: absolute;
+    top: 12px;
+    left: 45px;
+    padding: 0.25rem;
+    z-index: 10;
     color: whitesmoke;
-    font-size: 12pt;
+    font-size: 8px;
     font-weight: 400;
     width: 100%;
     margin: 0rem;
     margin-bottom: 10px;
-    text-overflow: ellipsis !important;
-    text-wrap: nowrap;
+    text-overflow: ellipsis;
+    text-wrap: wrap;
     overflow: hidden;
+    background-color: rgba(0,0,0,0.3);
+    width: fit-content;
 }
 
 .game-info {
-    background-color: rgba(0,0,0,0.1);
     padding: 1rem;
     padding-top: 0.5rem;    
     border-bottom-left-radius: 5px;

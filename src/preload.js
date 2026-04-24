@@ -43,3 +43,7 @@ contextBridge.exposeInMainWorld('launchGameService', {
 contextBridge.exposeInMainWorld('autoInstallService', {
   autoInstallAndConfigure: (emulatorName) => invoke('autoInstallAndConfigure', emulatorName)
 })
+
+contextBridge.exposeInMainWorld('metadataService', {
+  getMetadata: (fileName) => invoke('get-metadata', fileName)
+})

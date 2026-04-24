@@ -1,11 +1,19 @@
 import fs from 'fs/promises'
 import {dialog} from 'electron'
 import config, { getRomFolderPath, setEmulatorPath, setRomFolderPath } from './configService.js';
+import path from 'path';
 
 /* Gets all files that can be run on a supported emulator in the ROM Folder (as configured in SetRomFolder)*/
 const getRomsFromFolder = async () => {
     if (getRomFolderPath() === '') return []
     return (await fs.readdir(getRomFolderPath())).filter(file => isSupportedFileType(file));
+}
+
+const getRomPathFromFilename = async (filename) => {
+    const romFolder = getRomFolderPath();
+    const files = await fs.readdir(romFolder);
+    if (!files.includes(filename)) return null;
+    return path.join(romFolder, filename);
 }
 
 /* Opens dialog to select ROM folder */
@@ -51,4 +59,5 @@ export {
     selectExe,
     selectRomFolder,
     getRomsFromFolder,
+    getRomPathFromFilename,
 }

@@ -16,7 +16,6 @@ dotenv.config()
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-await getMetadata('C:\\Users\\Matan\\Desktop\\EmulatorRoms\\diamond.nds')
 
 let win;
 const createWindow = () => {
@@ -62,7 +61,7 @@ app.whenReady().then(() => {
     handleIpc('reset-romfolder', () => resetRomFolderPath())
     handleIpc('autoInstallAndConfigure', async (e, emulatorName) => AutoInstallAndConfigure(emulatorName))
     handleIpc('get-supported-emulators', (e, fileFormat) => getSupportedEmulators(fileFormat))
-
+    handleIpc('get-metadata', (e, fileName) => getMetadata(fileName))
     handleIpc('window-minimize', () => win.minimize());
     handleIpc('window-maximize', () => {
     if (win.isMaximized()) {

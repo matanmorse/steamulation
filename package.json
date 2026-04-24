@@ -12,7 +12,8 @@
     "electron-squirrel-startup": "^1.0.1",
     "electron-store": "^11.0.2",
     "glob": "^13.0.6",
-    "node-7z": "^3.0.0"
+    "node-7z": "^3.0.0",
+    "steamgriddb": "^2.2.1"
   },
   "scripts": {
     "start": "electron ."

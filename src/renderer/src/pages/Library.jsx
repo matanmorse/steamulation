@@ -8,15 +8,33 @@ import GameCard from '../components/GameCard'
 function App() {
   const [games, setGames] = useState([])
   const [selectedTab, setSelectedTab] = useState('All Games')
+  const [metadata, setMetadata] = useState({})
 
   useEffect(() => {
       fetchGames();
     }, []
   )
+  useEffect(() => {
+    getMetadata();
+  }, [games]
+  )
+
+const getMetadata = async () => {
+  const metadatas = {};
+  await Promise.all(
+    games.map(async (g) => {
+      if (!g) return;
+
+      const metadataEntry = await window.metadataService.getMetadata(g);
+      metadatas[g] = metadataEntry;
+    })
+  );
+  setMetadata(metadatas);
+  console.log(metadatas);
+};
 
   const fetchGames = async () => {
     const res = await window.fileService.getRomsFromFolder();
-    console.log(res);
     setGames(res)
   }
 
@@ -58,7 +76,7 @@ function App() {
         </div>
         <div className="game-card-grid">
           {games.map((game, index) => (
-            <GameCard key={index} title={game} romPath={game}/>
+            <GameCard key={index} title={game} romPath={game} metadata={metadata[game]}/>
           ))}
         </div>
       </div>
