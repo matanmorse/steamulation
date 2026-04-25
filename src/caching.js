@@ -1,18 +1,20 @@
+const inFlight = {};
 
-/* get from a fetchfunction using caching with electron-store */
 const withCache = async (cache, namespace, key, fetchFn) => {
-    const store = cache.get(namespace) ?? {}
-    if (key in store) return store[key]
+    const store = cache.get(namespace) ?? {};
+    if (key in store) return store[key];
 
-    /* If not in store, get from fetch function
-        these functions need to be declared anonymously 
-        to use arguments in the fetch, like
-        withCache(metadataCache, 'metadata', filename, () => getMetadata(filename))
-    */
-    const value = await fetchFn()
-    console.log(`[Cache] Adding cache entry for key ${key} in ${namespace}`)
-    cache.set(namespace, {...store, [key]:value })
-    return value;
+    const inFlightKey = `${namespace}:${key}`;
+    if (inFlightKey in inFlight) return inFlight[inFlightKey];
+
+    inFlight[inFlightKey] = fetchFn().then(value => {
+        console.log('[Cache] Setting Cache Entry for ' + key + ' in ' + namespace)
+        cache.set(namespace, { ...cache.get(namespace) ?? {}, [key]: value });
+        delete inFlight[inFlightKey];
+        return value;
+    });
+
+    return inFlight[inFlightKey];
 }
 
 /* Clear any entry from the cache
