@@ -6,11 +6,11 @@ import dotenv from 'dotenv'
 import { spawn } from "node:child_process";
 import { getRomPathFromFilename } from "./fileService.js";
 import SGDB from "steamgriddb";
-import igdb from 'igdb-api-node';
 import apicalypse from 'apicalypse'
 import { clearCache } from "../caching.js";
 import { clear } from "node:console";
 import { title } from "node:process";
+import sortByLexicalSimilarity from "../metadataHelper.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -122,7 +122,6 @@ const authorization = buildAuthorization({
 const getMetadata = async (filename) => {
     if (!filename) return undefined;
 
-    console.log('Metadata cache miss for ' + filename);
     const romPath = await getRomPathFromFilename(filename);
     const systemIds = fileEndingsToSystemID[romPath.split('.').at(-1)];
     const [gameLists, hashes] = await Promise.all([
@@ -131,7 +130,7 @@ const getMetadata = async (filename) => {
     ]);
 
     var game = searchForHashes(systemIds, gameLists, hashes)
-    if (game === null) console.log(`No game found for ${filename}`);
+    // if (game === null) console.log(`No game found for ${filename}`);
 
     // if we couldn't identify the game by its rom, just get cover art from filename as fallback
     if (game === null) {
@@ -160,7 +159,7 @@ const searchForHashes = (systemIds, gameLists, hashes) => {
         const game = gameList?.find(x => x.hashes.includes(hash));
         if (!game) continue;
 
-        console.log(`Found - ${game.title}`);
+        // console.log(`Found - ${game.title}`);
         return {
             title: game.title,
             hash,
@@ -184,7 +183,9 @@ const hashRom = async (romPath, systemIds) => {
                 let output = '';
                 // to view hashes, put this after the output+=data; 
                 // 
-                rahasher.stdout.on('data', (data) => {output += data;console.log(`hashing ${romPath} on system ${id} got ${output}`);});
+                rahasher.stdout.on('data', (data) => {output += data;
+                    //console.log(`hashing ${romPath} on system ${id} got ${output}`);
+                    });
                 rahasher.on('close', () => resolve({ id, hash: output.trim() || null }));
                 rahasher.on('error', () => resolve({ id, hash: null }));
             });
@@ -221,21 +222,21 @@ const getCoverArtFromName = async (title) => {
     return grids[0].url;
 }
 
-const getIGBBMetadata = async (title, systemId) => {
-    const IGDBSystemId = IGDB_PLATFORM_IDS[systemId];
-    console.log(`[IGDB Metadata] Getting IGDB entry for system ${systemId} with IGDB system ${IGDBSystemId} and name ${title}`);
+const getIGBBMetadata = async (title) => {
+    console.log(`[IGDB Metadata] Getting IGDB entry for name ${title}`);
     const response = await apicalypse(IGDBQueryData)
-        .fields('name, cover, summary, artworks, first_release_date, game_type, total_rating_count, platforms')
+        .fields('name, summary, first_release_date')
         .search(title)
         .limit(10)
-        .where('game_type = 0')
         .request('/games')
-    const resData = response.data;
-    // return response with highest rating count, biasing to more popular titles
-    const sortedData = resData.sort((a, b) => (b.total_rating_count ?? 0) - (a.total_rating_count ?? 0));
-    console.log(sortedData)
+    var resData = response.data;
+    
+    // return entry with the greatest lexical similarity to the title
+    const sortedData = sortByLexicalSimilarity(title, resData)
     return sortedData[0];
 }
 
-clearCache(metadataCache, 'metadata');
+console.log(metadataCache.path)
+clearCache(metadataCache, ['metadata', 'Super Paper Mario (USA).rvz']);
+
 export {getMetadata, metadataCache}

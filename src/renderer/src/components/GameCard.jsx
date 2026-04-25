@@ -16,7 +16,7 @@ const GameCard = ({title, romPath, metadata}) => {
 
     const titleWithMetadata = metadata ? metadata.title : title;
     const launchGame = async () => {
-        if (!hasConfiguredEmulator) {        
+        if (!hasConfiguredEmulator) {    
             showModal(
             <NoEmulatorModal 
                 fileExtension={fileExtension}
@@ -24,7 +24,9 @@ const GameCard = ({title, romPath, metadata}) => {
             />); 
             return;
         }
-        const res = await window.launchGameService.launchGame(romPath)
+        setIsLoading(true);    
+        await window.launchGameService.launchGame(romPath)
+        setIsLoading(false);
     }
 
     /* Get supported emulators based on file extension from configService */
@@ -47,19 +49,22 @@ const GameCard = ({title, romPath, metadata}) => {
     
     return (
     <>
-        <div className="game-card-wrapper" >
+        <div className="game-card-wrapper" onClick={() => {
+            showModal(<>
+                <pre>{metadata.name}</pre>
+                <pre style={{textWrap: 'wrap'}}>{metadata.summary}</pre>
+            </>)
+        }}>
             <EmulatorIconList emulatorNameList={supportedEmulators}/>
             <div className="game-card-image-wrapper" style={{backgroundImage: metadata && `url(${metadata.coverArt})`}}>
                 {isLoading && <ClipLoader class="game-card-loader" size={60} color='blue'/>}
-                <div className="game-info">
+                <div className="game-info"> 
             
                 <button className="game-card-launch-button" onClick={launchGame}>
                     <PlayCircleIcon/>
-                    Launch
                 </button>
             </div>
             </div>
-
         </div>
     </>
     )
