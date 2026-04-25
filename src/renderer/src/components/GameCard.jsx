@@ -47,7 +47,8 @@ const GameCard = ({title, romPath, metadata}) => {
         });
     }, [supportedEmulators])
     
-    return (
+    if (!metadata) return; // don't render until metadata has finished fetching
+    else return (
     <>
         <div className="game-card-wrapper" onClick={() => {
             showModal(<>

@@ -10,7 +10,7 @@ import apicalypse from 'apicalypse'
 import { clearCache } from "../caching.js";
 import { clear } from "node:console";
 import { title } from "node:process";
-import sortByLexicalSimilarity from "../metadataHelper.js";
+import {sortByLexicalSimilarity, sanitizeRomName} from "../metadataHelper.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -102,7 +102,7 @@ const SGBDClient = new SGDB(process.env.STEAMGRIDDB_API_KEY)
 
 // First, get an access token
 const tokenRes = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.IGDB_CLIENT_ID}&client_secret=${process.env.IGDB_CLIENT_SECRET}&grant_type=client_credentials`, { method: 'POST' });
-const { access_token } = await tokenRes.json();
+const { access_token } = await tokenRes.json(); console.log(access_token);
 // configure IGDB data with token and client id
 const IGDBQueryData = {
     method: 'post',
@@ -134,13 +134,13 @@ const getMetadata = async (filename) => {
 
     // if we couldn't identify the game by its rom, just get cover art from filename as fallback
     if (game === null) {
-        const titleFromFilename = filename.split('.')[0];
+        const titleFromFilename = sanitizeRomName(filename)
         game = {title: titleFromFilename, coverArt: await getCoverArtFromName(titleFromFilename)}
     }
 
     // TODO: LOOP THROUGH SYSTEM IDS
     const igdb_metadata = await getIGBBMetadata(game.title, systemIds[0])
-    if (igdb_metadata === undefined) console.log('[IGDB Metadata] IGDB data for ' + title + ' was undefined.')
+    if (igdb_metadata === undefined) console.log('[IGDB Metadata] IGDB data for ' + game.title + ' was undefined.')
     
     // if we found a title, get cover art from SteamGridDB
     const coverArt = await getCoverArtFromName(game.title);
@@ -225,14 +225,14 @@ const getCoverArtFromName = async (title) => {
 const getIGBBMetadata = async (title) => {
     console.log(`[IGDB Metadata] Getting IGDB entry for name ${title}`);
     const response = await apicalypse(IGDBQueryData)
-        .fields('name, summary, first_release_date')
+        .fields('name, summary, first_release_date, total_rating_count')
         .search(title)
         .limit(10)
         .request('/games')
     var resData = response.data;
-    
     // return entry with the greatest lexical similarity to the title
     const sortedData = sortByLexicalSimilarity(title, resData)
+    console.log(sortedData);
     return sortedData[0];
 }
 
