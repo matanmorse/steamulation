@@ -1,7 +1,8 @@
 import {app, BrowserWindow, ipcMain} from 'electron'
 import { fileURLToPath } from 'url';
 import path from 'node:path'
-import { selectExe, selectRomFolder, getGames, doRomAutoScan } from './services/fileService.js';
+import { selectExe, selectRomFolder, getGames } from './services/fileService.js';
+import { doRomAutoScan } from './services/scanService.js';
 import { launchGame } from './services/launchGameService.js';
 import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
