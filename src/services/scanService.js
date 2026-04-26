@@ -1,6 +1,10 @@
 import path from 'path'
 import fs from 'fs/promises'
 import os from 'os'
+import config from './configService.js';
+import { romStore } from './fileService.js';
+import { getMetadata, metadataCache } from './metadataService.js';
+import withCache from '../caching.js';
 
 const DEFAULT_SCAN_FOLDERS = [
   path.join(os.homedir(), 'Desktop'),
@@ -18,6 +22,11 @@ const doRomAutoScan = async() => {
     const existing = romStore.get('roms') ?? [];
     const merged = [...new Set([...existing, ...scanResult])];
     romStore.set('roms', merged);
+    
+    // fetch metadata for new roms so that cache is populated
+    await Promise.all(merged.map(async (x) => {
+        await withCache(metadataCache, 'metadata', x, () => getMetadata(x))
+    }));
 }
 
 /* Returns all valid roms within the folder and its subfolders */
@@ -32,7 +41,7 @@ const scanForRoms = async (folderPath) => {
         const fullPath = path.join(dir, entry.name);
         if (entry.isDirectory()) {
             await scan(fullPath);
-        } else if (entry.isFile() && (entry.name)) {
+        } else if (entry.isFile() && isSupportedFileType(entry.name)) {
             console.log(`[Scanner] Found ${fullPath}`)
             roms.push(fullPath);
         }
