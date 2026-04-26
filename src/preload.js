@@ -19,7 +19,7 @@ contextBridge.exposeInMainWorld('fileService', {
   readFiles: () => invoke('readFiles'),
   selectExe: async (emulatorName) => await invoke('select-exe', emulatorName),
   selectRomFolder: async () => invoke('select-rom-folder'),
-  getRomsFromFolder: async () => invoke('get-roms-from-folder')
+  getGames: async () => await invoke('get-games')
 })
 
 contextBridge.exposeInMainWorld('configService', {
@@ -42,8 +42,4 @@ contextBridge.exposeInMainWorld('launchGameService', {
 
 contextBridge.exposeInMainWorld('autoInstallService', {
   autoInstallAndConfigure: (emulatorName) => invoke('autoInstallAndConfigure', emulatorName)
-})
-
-contextBridge.exposeInMainWorld('metadataService', {
-  getMetadata: (fileName) => invoke('get-metadata', fileName)
 })

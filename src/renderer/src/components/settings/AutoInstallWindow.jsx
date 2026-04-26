@@ -21,8 +21,10 @@ const AutoInstallWindow = ({selectedEmulator, setUserConfigureManually}) => {
             </div>
             <p>No path configured for {selectedEmulator}.</p>
             <div className="auto-install-buttons-wrapper">
+                {selectedEmulator !== 'Rom Folder' &&
                 <button className="auto-install-button" onClick={() => DoAutoInstallation()}>
                     Auto Install/Configure</button>
+                }
                 <button className="configure-manually-button" onClick={() => setUserConfigureManually(true)}>
                     Configure Manually
                 </button>

@@ -4,8 +4,6 @@ import apicalypse from 'apicalypse';
 dotenv.config({quiet: true})
 
 // First, get an access token
-console.log(process.env.IGDB_CLIENT_ID)
-console.log(process.env.IGDB_CLIENT_SECRET);
 const tokenRes = await fetch(`https://id.twitch.tv/oauth2/token?client_id=${process.env.IGDB_CLIENT_ID}&client_secret=${process.env.IGDB_CLIENT_SECRET}&grant_type=client_credentials`, { method: 'POST' });
 const { access_token } = await tokenRes.json();
 

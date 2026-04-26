@@ -1,6 +1,5 @@
 import ElectronStore from "electron-store";
 import { fileURLToPath } from "node:url";
-import { getRomPathFromFilename } from "./fileService.js";
 import { clearCache } from "../caching.js";
 import {sanitizeRomName} from "../helpers/metadataHelper.js";
 import getIGBBMetadata from "../helpers/IGDBHelper.js";
@@ -71,13 +70,12 @@ const fileEndingsToSystemID = {
 }
 
 const metadataCache = new ElectronStore();
-const getMetadata = async (filename) => {
-    if (!filename) return undefined;
-    const romPath = await getRomPathFromFilename(filename);
-    const systemIds = fileEndingsToSystemID[romPath.split('.').at(-1)];
+const getMetadata = async (path) => {
+    const systemIds = fileEndingsToSystemID[path.split('.').at(-1)];
+    const filename = path.split('\\').at(-1);
 
     // Try to find canonical game title by its ROM, if no match found, sanitize ROM filename and use that as the title
-    var game = await searchForHashes(systemIds, romPath)
+    var game = await searchForHashes(systemIds, path)
     if (game === null) {
         const titleFromFilename = sanitizeRomName(filename)
         game = {title: titleFromFilename, coverArt: await getCoverArtFromName(titleFromFilename)}
@@ -91,5 +89,4 @@ const getMetadata = async (filename) => {
     }
 }
 
-clearCache(metadataCache, ['metadata'])
 export {getMetadata, metadataCache}

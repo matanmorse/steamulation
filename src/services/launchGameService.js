@@ -4,8 +4,6 @@ import config, {getEmulatorPath, getRomFolderPath, hasEmulator} from './configSe
 /* Launches a game given ROM path (emulator is inferred from supported file types in the emulators config */
 const launchGame = async (romPath) => {
     return new Promise(resolve => {
-        const fullPath = getRomFolderPath() + '\\' + romPath;
-
         // TODO: add more advanced emulator picking logic in case multiple emulators support the same file type (ex: .bin supported by melonDS and Citra)
         const fileType = romPath.split('.')[1]
         const emulators = getEmulatorsFromExtension(fileType)
@@ -13,18 +11,17 @@ const launchGame = async (romPath) => {
 
         const perEmulatorCLIArgs = config.emulators.find(x => x.name === emulator).cliArgs || []
 
-        console.log(emulator)
-        console.log(`Launching game with rom path ${romPath} command ${getEmulatorPath(emulator).split('\\').slice(-1)[0]} ${perEmulatorCLIArgs.join(' ')} ${fullPath}`)
-        const game = spawn(getEmulatorPath(emulator), [...perEmulatorCLIArgs, fullPath])
+        console.log(`Launching game with rom path ${romPath} command ${getEmulatorPath(emulator).split('\\').slice(-1)[0]} ${perEmulatorCLIArgs.join(' ')} ${romPath}`)
+        const game = spawn(getEmulatorPath(emulator), [...perEmulatorCLIArgs, romPath])
             
         game.stdout.setEncoding('utf8')
 
         game.addListener('close', () => {
-            console.log('game closed')
+            console.log(`[From ${emulator}] Game closed`)
         })
 
         game.on('spawn', () => {
-            console.log('Game spawned');
+            console.log(`[From ${emulator}] Game opened`)
             resolve()
         });
 

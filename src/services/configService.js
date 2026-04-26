@@ -63,7 +63,6 @@ const setRomFolderPath = (value) => {
 
 const resetRomFolderPath = () => {
     console.log('resetting rom folder path')
-    throw new Error('resetRomFolderPath is not implemented yet, be careful when using it since it will delete the romfolder path without confirmation')
     settingsStore.delete('romfolder-path')
 }
 

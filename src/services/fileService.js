@@ -2,19 +2,51 @@ import fs from 'fs/promises'
 import {dialog} from 'electron'
 import config, { getRomFolderPath, setEmulatorPath, setRomFolderPath } from './configService.js';
 import path from 'path';
+import ElectronStore from 'electron-store';
+import withCache from '../caching.js';
+import { getMetadata, metadataCache } from './metadataService.js';
 
-/* Gets all files that can be run on a supported emulator in the ROM Folder (as configured in SetRomFolder)*/
-const getRomsFromFolder = async () => {
-    const romFolderPath = getRomFolderPath();
-    if (romFolderPath === '' || !romFolderPath) return []
-    return (await fs.readdir(romFolderPath)).filter(file => isSupportedFileType(file));
+const romStore = new ElectronStore()
+
+/* Get games and their associated metadata */
+const getGames = async () => {
+    // Get roms from store
+    var roms = romStore.get('roms', []);
+
+    // temp- just scan for roms when we load in preprogrammed folder
+    const scanResult = await scanForRoms("C:\\Users\\Matan\\Desktop\\EmulatorRoms")
+    roms = [...new Set([...roms, ...scanResult])] // add any unique roms to the store
+    romStore.set('roms', roms)
+
+    // add metadata
+    roms = await Promise.all(roms.map(async (rom) => {
+        const metadata = await withCache(metadataCache, 'metadata', rom, () => getMetadata(rom))
+        return {
+            path: rom,
+            ...metadata,
+        }
+    }))
+    return roms;
 }
 
-const getRomPathFromFilename = async (filename) => {
-    const romFolder = getRomFolderPath();
-    const files = await fs.readdir(romFolder);
-    if (!files.includes(filename)) return null;
-    return path.join(romFolder, filename);
+/* Returns all valid roms within the folder and its subfolders */
+const scanForRoms = async (folderPath) => {
+    const roms = [];    
+  
+    const scan = async (dir) => {
+        const entries = await fs.readdir(dir, { withFileTypes: true });
+        await Promise.all(entries.map(async (entry) => {
+        const fullPath = path.join(dir, entry.name);
+        if (entry.isDirectory()) {
+            await scan(fullPath);
+        } else if (entry.isFile() && isSupportedFileType(entry.name)) {
+            roms.push(fullPath);
+        }
+        }));
+  };
+
+  await scan(folderPath);
+  return roms;
 }
 
 /* Opens dialog to select ROM folder */
@@ -59,6 +91,5 @@ const isSupportedFileType = (filePath) => {
 export {
     selectExe,
     selectRomFolder,
-    getRomsFromFolder,
-    getRomPathFromFilename,
+    getGames,
 }

@@ -1,4 +1,4 @@
-import { buildAuthorization } from "@retroachievements/api";
+import { buildAuthorization, getGameList } from "@retroachievements/api";
 import { metadataCache } from "../services/metadataService.js";
 
 // auth for RA_API
@@ -9,12 +9,13 @@ const authorization = buildAuthorization({
 
 /* Get game lists for multiple systemIds, using caching */
 const getGameLists = async (systemIds) => {
+    return {}
     let gameLists = metadataCache.get(`gameLists`) ?? {};
 
     const missing = systemIds.filter(id => gameLists[id] === undefined);
 
     await Promise.all(missing.map(async (id) => {
-        gameLists[id] = await getGameListRAAPI(authorization, {
+        gameLists[id] = await getGameList(authorization, {
             consoleId: id,
             shouldRetrieveGameHashes: true
         });

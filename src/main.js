@@ -1,7 +1,7 @@
 import {app, BrowserWindow, ipcMain} from 'electron'
 import { fileURLToPath } from 'url';
 import path from 'node:path'
-import { getRomsFromFolder, selectExe, selectRomFolder } from './services/fileService.js';
+import { selectExe, selectRomFolder, getGames } from './services/fileService.js';
 import { launchGame } from './services/launchGameService.js';
 import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
@@ -22,7 +22,7 @@ const createWindow = () => {
     // TODO: Open to window size
     win = new BrowserWindow({
         width: 1440,
-        height: 1080,
+        height: 850,
         frame:false,
         icon: path.join(__dirname, 'resources', 'app-icon.ico'),
         webPreferences: {
@@ -53,7 +53,7 @@ app.whenReady().then(() => {
     handleIpc('readFiles', async () => readFiles())
     handleIpc('launchGame', async (event, romPath) => launchGame(romPath))
     handleIpc('select-exe', async (event, emulator) => selectExe(emulator))
-    handleIpc('get-roms-from-folder', async () => getRomsFromFolder())
+    handleIpc('get-games', async () => getGames())
     handleIpc('select-rom-folder', async () => selectRomFolder())
     handleIpc('has-settings', () => hasSettings())
     handleIpc('reset-settings', (e, emulator) => resetSettings(emulator))
@@ -61,7 +61,6 @@ app.whenReady().then(() => {
     handleIpc('reset-romfolder', () => resetRomFolderPath())
     handleIpc('autoInstallAndConfigure', async (e, emulatorName) => AutoInstallAndConfigure(emulatorName))
     handleIpc('get-supported-emulators', (e, fileFormat) => getSupportedEmulators(fileFormat))
-    handleIpc('get-metadata', (e, fileName) => withCache(metadataCache, 'metadata', fileName, () => getMetadata(fileName)))
     handleIpc('window-minimize', () => win.minimize());
     handleIpc('window-maximize', () => {
     if (win.isMaximized()) {

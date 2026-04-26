@@ -1,9 +1,10 @@
 import EmulatorNameAndIcon from "../EmulatorNameAndIcon"
+import ROMSettingsWindow from "./ROMSettingsWindow";
 
 const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator, SetRomFolder, ResetRomFolder, SelectedEmulatorExePath, RomFolderPath, setUserConfigureManually}) => {
     return (
     <form className="settings-form">
-        <EmulatorNameAndIcon emulatorName={selectedEmulator} size={4.5} bold={true} otherText={"Emulator Settings"}/>
+        <EmulatorNameAndIcon emulatorName={selectedEmulator} size={4.5} bold={true} otherText={selectedEmulator != 'Rom Folder' ? "Emulator Settings" : "Settings"}/>
         <div className="exe-path-form-wrapper">
             {selectedEmulator != 'Rom Folder' ?
             <>
@@ -25,24 +26,13 @@ const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmul
             className="auto-install-link"
             onClick={(e) => {e.preventDefault; setUserConfigureManually(false);}}
             >auto-install and configure</a>.</p>)}
-            
             </> : 
             /* Special window for rom folder*/
-            <>
-                <label>Folder path containing ROMs:</label>
-                <div className="exe-input-wrapper">
-                <div className="input-wrapper">
-                    <input type="text" readOnly class={"current-exe-path " + (RomFolderPath() === undefined && "gray-text")}
-                    placeholder={RomFolderPath() ?? "No ROMs Selected"}
-                    >
-                    
-                    </input>
-                    <i className="bi bi-x-lg" onClick={(e) => ResetRomFolder(e)}></i>
-                </div>
-                <button class="exe-input-button" onClick={(e) => SetRomFolder(e) }><i class="bi bi-folder" style={{fontSize: '16pt'}}></i> Browse</button>
-            </div>
-            <p class="text-info">Select the folder where your ROMs are located (for best experience, put all roms in one folder).</p>
-            </>
+                <ROMSettingsWindow 
+                    ResetRomFolder={ResetRomFolder}
+                    SetRomFolder={SetRomFolder}
+                    RomFolderPath={RomFolderPath}
+                />
             } 
         </div>
     </form>

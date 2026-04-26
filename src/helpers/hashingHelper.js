@@ -46,9 +46,8 @@ const hashRom = async (romPath, systemIds) => {
                 const rahasher = spawn(RA_HASHER_EXE_PATH, [id, romPath]);
                 let output = '';
                 // to view hashes, put this after the output+=data; 
-                // 
+                //console.log(`hashing ${romPath} on system ${id} got ${output}`);
                 rahasher.stdout.on('data', (data) => {output += data;
-                    //console.log(`hashing ${romPath} on system ${id} got ${output}`);
                     });
                 rahasher.on('close', () => resolve({ id, hash: output.trim() || null }));
                 rahasher.on('error', () => resolve({ id, hash: null }));

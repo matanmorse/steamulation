@@ -7,14 +7,13 @@ import EmulatorIconList from './library/EmulatorIconList'
 import { useModal } from '../contexts/ModalContext'
 import NoEmulatorModal from '../modals/NoEmulatorModal'
 
-const GameCard = ({title, romPath, metadata}) => {
+const GameCard = ({game}) => {
     const [isLoading, setIsLoading] = useState(false)
-    const fileExtension = title.split('.').slice(-1)[0]
+    const fileExtension = game.path.split('.').at(-1);
     const [supportedEmulators, setSupportedEmulators] = useState([]);
     const [hasConfiguredEmulator, setHasConfiguredEmulator] = useState(true); /* has an exe been properly configured for an emulator that supports this? */
     const { showModal, hideModal } = useModal();
 
-    const titleWithMetadata = metadata ? metadata.title : title;
     const launchGame = async () => {
         if (!hasConfiguredEmulator) {    
             showModal(
@@ -25,7 +24,7 @@ const GameCard = ({title, romPath, metadata}) => {
             return;
         }
         setIsLoading(true);    
-        await window.launchGameService.launchGame(romPath)
+        await window.launchGameService.launchGame(game.path)
         setIsLoading(false);
     }
 
@@ -47,17 +46,17 @@ const GameCard = ({title, romPath, metadata}) => {
         });
     }, [supportedEmulators])
     
-    if (!metadata) return; // don't render until metadata has finished fetching
+    if (!game) return; // don't render until game has finished fetching
     else return (
     <>
         <div className="game-card-wrapper" onClick={() => {
             showModal(<>
-                <pre>{metadata.name}</pre>
-                <pre style={{textWrap: 'wrap'}}>{metadata.summary}</pre>
+                <pre>{game.name}</pre>
+                <pre style={{textWrap: 'wrap'}}>{game.summary}</pre>
             </>)
         }}>
             <EmulatorIconList emulatorNameList={supportedEmulators}/>
-            <div className="game-card-image-wrapper" style={{backgroundImage: metadata && `url(${metadata.coverArt})`}}>
+            <div className="game-card-image-wrapper" style={{backgroundImage: `url(${game.coverArt})`}}>
                 {isLoading && <ClipLoader class="game-card-loader" size={60} color='blue'/>}
                 <div className="game-info"> 
             
