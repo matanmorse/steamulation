@@ -13,7 +13,7 @@
         {
             "name": "MelonDS",
             "prettyName": "MelonDS",
-            "fileFormats": ["nds", "srl"],
+            "fileFormats": ["nds"],
             "installLinks": {
                 "windows": "https://melonds.kuribo64.net/downloads/melonDS-1.1-windows-x86_64.zip"
             },
@@ -23,7 +23,7 @@
         {
             "name": "Dolphin",
             "prettyName": "Dolphin",
-            "fileFormats": ["iso", "rvz", "gcz", "gcm", "wia", "ciso", "dol", "elf", "wbfs", "rvz", "iso", "wia", "wad", "dol", "elf"],
+            "fileFormats": ["iso", "rvz", "gcz", "gcm", "wia", "ciso", "dol", "wbfs", "rvz", "iso", "wia", "wad", "dol"],
             "installLinks": {
                 "windows": "https://dl.dolphin-emu.org/releases/2603a/dolphin-2603a-x64.7z"
             },
@@ -46,7 +46,7 @@
         {
             "name": "PPSSPP",
             "prettyName": "PPSSPP",
-            "fileFormats": ["iso", "cso", "chd", "pbp", "elf", "prx"],
+            "fileFormats": ["iso", "chd", "pbp", "prx"],
             "installLinks": {
                 "windows": "https://github.com/hrydgard/ppsspp/releases/download/v1.20.3/PPSSPP-v1.20.3-Windows-x64.zip"
             },
@@ -61,7 +61,7 @@
         {
             "name": "Ares",
             "prettyName": "Ares",
-            "fileFormats": ["cue", "chd", "mmi", "n64", "v64", "z64", "ndd", "sfc", "smc", "nes", "fds", "gb", "nbc", "gba", "md", "smd", "gen", "a26"],
+            "fileFormats": ["cue", "chd", "mmi", "n64", "v64", "z64", "ndd", "sfc", "smc", "nes", "fds", "gb", "nbc", "gba", "smd", "gen", "a26"],
             "installLinks": {
                 "windows": "https://github.com/ares-emulator/ares/releases/download/v147/ares-windows-x64.zip"
             },
@@ -80,7 +80,7 @@
         {
             "name": "PCSX2",
             "prettyName": "PCSX2",
-            "fileFormats": ["iso", "chd", "cso", "zso"],
+            "fileFormats": ["iso", "chd", "zso"],
             "installLinks": {
                 "windows": "https://github.com/PCSX2/pcsx2/releases/download/v2.6.3/pcsx2-v2.6.3-windows-x64-Qt.7z"
             },
@@ -121,7 +121,6 @@
         "cia": ["Citra"],
         "3dsx": ["Citra"],
         "nds": ["MelonDS"],
-        "srl": ["MelonDS"],
         "iso": ["Dolphin", "PPSSPP", "PCSX2", "DuckStation"],
         "rvz": ["Dolphin"],
         "gcz": ["Dolphin"],
@@ -129,10 +128,8 @@
         "wia": ["Dolphin"],
         "ciso": ["Dolphin"],
         "dol": ["Dolphin"],
-        "elf": ["Dolphin", "PPSSPP"],
         "wbfs": ["Dolphin"],
         "wad": ["Dolphin"],
-        "cso": ["PPSSPP", "PCSX2"],
         "chd": ["PPSSPP", "PCSX2", "DuckStation"],
         "pbp": ["PPSSPP", "DuckStation"],
         "prx": ["PPSSPP"],
@@ -153,7 +150,6 @@
         "gb": ["Ares"],
         "nbc": ["Ares"],
         "gba": ["Ares"],
-        "md": ["Ares"],
         "smd": ["Ares"],
         "gen": ["Ares"],
         "a26": ["Ares"],

@@ -5,7 +5,7 @@ import config, {getEmulatorPath, getRomFolderPath, hasEmulator} from './configSe
 const launchGame = async (romPath) => {
     return new Promise(resolve => {
         // TODO: add more advanced emulator picking logic in case multiple emulators support the same file type (ex: .bin supported by melonDS and Citra)
-        const fileType = romPath.split('.')[1]
+        const fileType = romPath.split('.').at(-1)
         const emulators = getEmulatorsFromExtension(fileType)
         const emulator = emulators.find(e => hasEmulator(e)); // pick first configured emulator
 

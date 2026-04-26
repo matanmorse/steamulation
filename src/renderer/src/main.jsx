@@ -8,6 +8,7 @@ import Settings from './pages/Settings.jsx'
 import { EmulatorProvider } from './contexts/SharedContext.jsx'
 import { ModalProvider, useModal } from './contexts/ModalContext.jsx'
 import ErrorModal from './modals/ErrorModal.jsx'
+import Debug from './pages/Debug.jsx'
 
 
 const Router = import.meta.env.DEV ? BrowserRouter : HashRouter
@@ -20,6 +21,7 @@ createRoot(document.getElementById('main')).render(
             <Route path="/" element={<Layout />}>
               <Route index element={<App />} />
               <Route path='/settings' element={<Settings />} />
+              <Route path='/debug' element={<Debug />} />
             </Route>
           </Routes>
       </StrictMode>

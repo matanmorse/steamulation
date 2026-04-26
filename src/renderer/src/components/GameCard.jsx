@@ -49,21 +49,17 @@ const GameCard = ({game}) => {
     if (!game) return; // don't render until game has finished fetching
     else return (
     <>
-        <div className="game-card-wrapper" onClick={() => {
-            showModal(<>
-                <pre>{game.name}</pre>
-                <pre style={{textWrap: 'wrap'}}>{game.summary}</pre>
-            </>)
-        }}>
+        <div className="game-card-wrapper">
             <EmulatorIconList emulatorNameList={supportedEmulators}/>
             <div className="game-card-image-wrapper" style={{backgroundImage: `url(${game.coverArt})`}}>
                 {isLoading && <ClipLoader class="game-card-loader" size={60} color='blue'/>}
                 <div className="game-info"> 
-            
+
                 <button className="game-card-launch-button" onClick={launchGame}>
                     <PlayCircleIcon/>
                 </button>
             </div>
+            {!game.name && <p style={{textWrap:'wrap', wordBreak: 'break-word'}}>{game.path}</p>}
             </div>
         </div>
     </>

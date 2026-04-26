@@ -70,12 +70,12 @@ const fileEndingsToSystemID = {
 }
 
 const metadataCache = new ElectronStore();
-metadataCache.delete('metadata');
 
 const getMetadata = async (path) => {
     const systemIds = fileEndingsToSystemID[path.split('.').at(-1)];
     const filename = path.split('\\').at(-1);
 
+    console.log(`System ids for ${filename} and ending ${path.split('.').at(-1)}`, systemIds)
     // Try to find canonical game title by its ROM, if no match found, sanitize ROM filename and use that as the title
     var game = await searchForHashes(systemIds, path)
     if (game === null) {

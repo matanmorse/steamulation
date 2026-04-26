@@ -43,3 +43,12 @@ contextBridge.exposeInMainWorld('launchGameService', {
 contextBridge.exposeInMainWorld('autoInstallService', {
   autoInstallAndConfigure: (emulatorName) => invoke('autoInstallAndConfigure', emulatorName)
 })
+
+contextBridge.exposeInMainWorld('scanService', {
+  doRomAutoScan: () => invoke('do-rom-auto-scan')
+})
+
+contextBridge.exposeInMainWorld('debugService', {
+  clearCache: (key) => invoke('clear-cache', key),
+  clearRoms: () => invoke('clear-roms')
+})

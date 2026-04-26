@@ -1,7 +1,7 @@
 import {app, BrowserWindow, ipcMain} from 'electron'
 import { fileURLToPath } from 'url';
 import path from 'node:path'
-import { selectExe, selectRomFolder, getGames } from './services/fileService.js';
+import { selectExe, selectRomFolder, getGames, doRomAutoScan } from './services/fileService.js';
 import { launchGame } from './services/launchGameService.js';
 import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
@@ -9,6 +9,7 @@ import dotenv from 'dotenv'
 import startup from 'electron-squirrel-startup'; // Use import for ESM
 import { getMetadata, metadataCache } from './services/metadataService.js';
 import withCache, { clearCache } from './caching.js';
+import { clearCache as clearCacheDebug, clearRoms } from './services/debugService.js';
 
 if (startup) {app.quit()}
 
@@ -61,6 +62,10 @@ app.whenReady().then(() => {
     handleIpc('reset-romfolder', () => resetRomFolderPath())
     handleIpc('autoInstallAndConfigure', async (e, emulatorName) => AutoInstallAndConfigure(emulatorName))
     handleIpc('get-supported-emulators', (e, fileFormat) => getSupportedEmulators(fileFormat))
+    handleIpc('clear-cache', (e, key) => clearCacheDebug(key))
+    handleIpc('clear-roms', () => clearRoms())
+    handleIpc('do-rom-auto-scan', () => doRomAutoScan())
+    
     handleIpc('window-minimize', () => win.minimize());
     handleIpc('window-maximize', () => {
     if (win.isMaximized()) {

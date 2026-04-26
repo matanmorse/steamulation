@@ -13,8 +13,9 @@ const inFlight = new Map();
 
 /* Get game lists for multiple systemIds, using caching */
 const getGameLists = async (systemIds) => {
+    if (!systemIds) return {}
     let gameLists = metadataCache.get(`gameLists`) ?? {};
-
+    
     const missing = systemIds.filter(id => gameLists[id] === undefined);
     console.log(`[RAAPI Helper] Getting missing game lists for `, missing)
     await Promise.all(missing.map(async (id) => {

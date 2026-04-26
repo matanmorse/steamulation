@@ -22,6 +22,12 @@ const Navbar = () => {
                             <i className='bi bi-gear-fill nav-link-icon' />
                             <h2>Settings</h2>
                         </Link>
+                                                <Link 
+                        className={"nav-link " + (location.pathname === '/debug' && 'nav-link-selected')}
+                        id="Settings" to="/debug">
+                            <i className='bi bi-tools nav-link-icon' />
+                            <h2>Debug</h2>
+                        </Link>
                     </div>
                 </nav>
             </header>
