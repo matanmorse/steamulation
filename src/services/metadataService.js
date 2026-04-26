@@ -70,6 +70,8 @@ const fileEndingsToSystemID = {
 }
 
 const metadataCache = new ElectronStore();
+metadataCache.delete('metadata');
+
 const getMetadata = async (path) => {
     const systemIds = fileEndingsToSystemID[path.split('.').at(-1)];
     const filename = path.split('\\').at(-1);

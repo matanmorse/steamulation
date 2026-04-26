@@ -14,6 +14,10 @@ const searchForHashes = async (systemIds, romPath) => {
         hashRom(romPath, systemIds),
     ]);
 
+    console.log('[searchForHashes] systemIds:', systemIds);
+    console.log('[searchForHashes] gameLists length:', gameLists.length);
+    console.log('[searchForHashes] gameLists keys defined:', gameLists.map((g, i) => `${systemIds[i]}: ${g !== undefined}`));
+
     // search for matches
     for (const id of systemIds) {
         const hash = hashes[id];

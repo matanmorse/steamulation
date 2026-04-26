@@ -16,6 +16,7 @@
     "glob": "^13.0.6",
     "igdb-api-node": "^6.0.5",
     "node-7z": "^3.0.0",
+    "p-limit": "^7.3.0",
     "steamgriddb": "^2.2.1"
   },
   "scripts": {
