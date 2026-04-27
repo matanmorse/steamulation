@@ -1,16 +1,17 @@
 import '../styles/TitleBar.css'
 import appIcon from '../../static/images/app-icon.png'
+import PrismIcon from './PrismIcon';
 const TitleBar = () => {
     return (
     <div className="title-bar">
         <div className="title-box">
-            <img src={appIcon} className='app-icon'/>
-            <div className="title">Steamulator v1.0</div>
+            <PrismIcon size={1.25} />
+            <div className="title">Prism v1.0</div>
         </div>
       <div className="window-controls">
-        <button onClick={() => window.windowService.minimize()}>–</button>
-        <button onClick={() => window.windowService.maximize()}>□</button>
-        <button onClick={() => window.windowService.close()}>×</button>
+        <button className="btn" onClick={() => window.windowService.minimize()}>–</button>
+        <button className="btn" onClick={() => window.windowService.maximize()}>□</button>
+        <button className="btn" onClick={() => window.windowService.close()}>×</button>
       </div>
     </div>
   );

@@ -5,6 +5,7 @@ import { useState } from 'react'
 import Navbar from '../components/Navbar'
 import { useModal } from '../contexts/ModalContext'
 import ErrorModal from '../modals/ErrorModal'
+import Sidebar from '../components/sidebar/Sidebar'
 
 const Layout = () => {
     const { showModal, hideModal } = useModal();
@@ -16,14 +17,12 @@ const Layout = () => {
     return (
         <>
             <TitleBar />
-            <Navbar />
             <div id="root">
+                <Sidebar />
                 <Outlet />
             </div>
         </>
     )
-  
-    
 }
 
 export default Layout

@@ -1,0 +1,115 @@
+.sidebar {
+    width: 250px;
+    background-color: var(--clr-surface-1);
+    border-right: solid 1px var(--clr-border);
+    padding: 1rem;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    .logo-box {
+        height: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 2rem;
+    }
+
+    .sidebar-title {
+        margin: 0px;
+        color: var(--clr-text-primary)
+    }
+
+    .sidebar-options-title {
+        font-size: 14px;
+        margin: 0px;
+        color: var(--clr-text-tertiary)
+    }
+
+    .sidebar-options {
+        margin-top: .5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        color: var(--clr-text-secondary);
+        font-size: 14px;
+    }
+
+    .sidebar-options-category {
+        flex: 1;
+    }
+
+    .option-icon-group {
+        align-items: center;
+        display: flex;
+        gap: 7px;
+        padding: 5px;
+        border-radius: 5px;
+    }
+
+    .option-icon-group > p {
+        margin: 0px;
+    }
+
+    .option-icon-group.settings {
+        margin-bottom: .5rem;
+    }
+
+    .settings-title {
+        color: var(--clr-text-secondary);
+        font-size: 14px;
+        margin: 0px;
+    }
+
+    hr {
+        border-width: 1px;
+        border-color: var(--clr-text-tertiary)
+    }
+
+    .systems {
+        margin-top: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .system-chip {
+        font-size: 14px;
+        color: var(--clr-text-secondary);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 3px;
+        border-radius: 5px;
+    }
+
+    .chip-left {
+        height: 6px;
+        width: 6px;
+        border-radius: 100%;
+    }
+
+    .system-chip:hover, .option-icon-group:hover {
+        background-color: var(--clr-surface-active);
+        color: var(--clr-text-primary);
+        cursor: pointer;
+    }
+
+    .selected {
+        background-color: var(--clr-primary-active);
+        color: var(--clr-primary-2);
+    }
+
+    .selected:hover {
+        background-color: var(--clr-primary-active);
+        color: var(--clr-primary-2);
+    }
+
+    .bi.bi-x {
+        margin-left: auto;
+        color: var(--clr-primary-1)
+    }
+
+    .bi.bi-x:hover {
+        color: var(--clr-text-primary)
+    }
+}

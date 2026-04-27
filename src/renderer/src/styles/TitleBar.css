@@ -1,27 +1,28 @@
 /* TitleBar.css */
 .title-bar {
-    position:sticky;
-    top:0;
-  height: 32px;
-  background: var(--clr-surface-a0);
-  color: white;
+  background-color: var(--clr-surface-1);
+  position:sticky;
+  top:0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   -webkit-app-region: drag;
-  border-bottom: 2px solid var(--clr-surface-a10);
+  border-bottom: 1px solid var(--clr-border);
+  border-top: 1px solid var(--clr-border);
+  height: 30px;
 }
 
 .title {
-    color: var(--clr-surface-a50);
+    color: var(--clr-text-tertiary);
 }
 
-.app-icon {
-    height: 20px;
-    border-radius: 50%;
+.icon-wrapper {
+    display: flex;
+    align-items: center;
 }
 
 .title-box {
+    padding: 2.5px;
     display:flex;
     gap:10px;
     align-items: center;
@@ -38,13 +39,12 @@
 }
 
 .window-controls {
-    height: 100%;
+    border-left: 1px solid var(--clr-border);
 }
 
 
 .window-controls button {
   background: none;
-  border: none;
   color: white;
   width: 40px;
   height: 100%;

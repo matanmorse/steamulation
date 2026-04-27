@@ -21,15 +21,13 @@ html, body {
 }
 
 body {
-  border: 2px solid var(--clr-surface-a10);
   box-sizing: border-box;
   min-height: 100vh;
   margin: 0;
   display: flex;
   justify-content: center;
   min-width: 320px;
-  background-color: var(--clr-surface-dark);
-
+  background-color: var(--clr-surface-0);
 }
 
 /* Don't edit me, use body instead */
@@ -43,7 +41,7 @@ body {
   text-align: center;
   background-color: var(--clr-surface-a0);
   overflow: hidden;
-  height: calc(100vh - 32px - 64px);
+  height: calc(100vh - 30px);
 }
 
 a {
@@ -55,88 +53,97 @@ a:hover {
   color: #535bf2;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  color: var(--clr-light-a0)
-}
-
-h3 {
-  color: var(--clr-primary-a50)
-}
-
-button {
-  border-radius: 8px;
+/* Base */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 6px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  font-size: 13px;
   font-weight: 500;
-  font-family: inherit;
-  background-color: var(--clr-primary-a0);
   cursor: pointer;
-  transition: all 0.25s;
-
- 
+  transition: all 0.15s ease;
+  color: var(--clr-text-primary);
 }
 
-button:hover {
-  transform: scale(1.02);
+/* Primary - main actions */
+.btn-primary {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: var(--clr-primary-border);
+  color: var(--clr-primary-1);
+}
+.btn-primary:hover {
+  background: rgba(139, 92, 246, 0.3);
+  border-color: rgba(192, 92, 246, 0.5);
 }
 
-button:hover:disabled {
-  transform: none;
+/* Ghost - secondary actions */
+.btn-ghost {
+  background: transparent;
+  border-color: var(--clr-border);
+}
+.btn-ghost:hover {
+  background: var(--clr-surface-active);
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
-button:disabled {
-  cursor:not-allowed;
-  background-color: var(--clr-primary-a30);
-  color: var(--clr-light-a10)
+/* Danger - destructive actions */
+.btn-danger {
+  background: rgba(248, 113, 113, 0.1);
+  border-color: rgba(248, 113, 113, 0.25);
+  color: #f87171;
+}
+.btn-danger:hover {
+  background: rgba(248, 113, 113, 0.2);
+  border-color: rgba(248, 113, 113, 0.4);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  
+/* Success - confirmations */
+.btn-success {
+  background: rgba(74, 222, 128, 0.1);
+  border-color: rgba(74, 222, 128, 0.25);
+  color: #4ade80;
+}
+.btn-success:hover {
+  background: rgba(74, 222, 128, 0.2);
+  border-color: rgba(74, 222, 128, 0.4);
+}
+
+/* Icon only */
+.btn-icon {
+  padding: 6px;
+  border-radius: 6px;
+}
+
+/* Sizes */
+.btn-sm { padding: 4px 10px; font-size: 12px; }
+.btn-lg { padding: 8px 18px; font-size: 14px; }
+
+/* Disabled */
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
 * {
-  /** Theme primary colors */
-  --clr-primary-a0: #4365df;
-  --clr-primary-a10: #3068f6;
-  --clr-primary-a20: #96b5df;
-  --clr-primary-a30: #a6bfe4;
-  --clr-primary-a40: #b5cae8;
-  --clr-primary-a50: #c4d4ed;
+  --clr-surface-0: rgb(20, 20, 30);
+  --clr-surface-1: rgb(26, 26, 40);
+  --clr-surface-2: rgb(39, 38, 60);
+  --clr-surface-active: rgba(255, 255, 255, 0.05);
 
-  /** Theme surface colors */
-  --clr-surface-dark: #161e27;
-  --clr-surface-a0: #1d2a36;
-  --clr-surface-a10: #394757;
-  --clr-surface-a20: #49535e;
-  --clr-surface-a30: #616a73;
-  --clr-surface-a40: #798189;
-  --clr-surface-a50: #93999f;
+  --clr-primary-1: rgb(196,181,253);
+  --clr-primary-2: #c4b5fd;
+  --clr-primary-active: rgba(139, 92, 246, 0.15);
+  --clr-primary-border: rgba(192, 92, 246, 0.3);
 
-  /** Theme tonal surface colors */
-  --clr-surface-tonal-a0: #253544;
-  --clr-surface-tonal-a10: #3b4857;
-  --clr-surface-tonal-a20: #515d6a;
-  --clr-surface-tonal-a30: #68727e;
-  --clr-surface-tonal-a40: #7f8892;
-  --clr-surface-tonal-a50: #989fa7;
-
-  --clr-light-a0: #FFFFFF;
-  --clr-light-a10: #F5f5f5;
-  --clr-light-a30: #f2f2f2;
-  --clr-light-a40: #e7e7e7;
-  --clr-light-a50: #c4c4c4;
-
-  --clr-danger: rgb(222, 95, 95);
-
+  --clr-border: rgb(255, 255, 255, 0.1);
+  
+  --clr-text-primary: rgba(255, 255, 255, 0.9);
+  --clr-text-secondary: rgba(255, 255, 255, 0.7);
+  --clr-text-tertiary: rgba(255,255,255, 0.4);
   box-sizing: border-box;
+  user-select: none;
 }
