@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs/promises'
 import os from 'os'
-import config from './configService.js';
+import config, { setEmulatorPath } from './configService.js';
 import { romStore } from './fileService.js';
 import { getMetadata, metadataCache } from './metadataService.js';
 import withCache from '../caching.js';
@@ -52,6 +52,37 @@ const scanForRoms = async (folderPath) => {
   return roms;
 }
 
+const doEmulatorAutoScan = async(emulatorName) => {
+    console.log(emulatorName);
+    const emulatorExeName = config.emulators.find(x => x.name === emulatorName).finalExeName
+
+    var response = await Promise.all(DEFAULT_SCAN_FOLDERS.map(async (folder) => {
+        return await scanForExe(emulatorExeName, folder)
+    }))
+    response = response.filter(Boolean).find(Boolean); // find first non-undefined entry
+    console.log(`[Scanner] Result of scan for ${emulatorName} : ${response}`);
+    if (!response) return undefined;
+    setEmulatorPath(emulatorName, response);
+}
+
+const scanForExe = async (filename, dir) => {
+    const scan = async (dir) => {
+        const entries = await fs.readdir(dir, { withFileTypes: true });
+        const result = await Promise.all(entries.map(async (entry) => {
+            const fullPath = path.join(dir, entry.name);
+            if (entry.isDirectory()) {
+                return await scan(fullPath);
+            } else if (entry.isFile() && entry.name === filename) {
+                const emulatorExePath = path.join(entry.parentPath, entry.name)
+                console.log(`Path- ${emulatorExePath}`)
+                return emulatorExePath;
+            }
+        }));
+        return result.flat(Infinity).filter(Boolean).find(Boolean);
+    }
+    return await scan(dir)
+}
+
 /* Returns if the full file path is compatible with any supported emulators */
 const isSupportedFileType = (filePath) => {
     if (!filePath.includes('.')) return false
@@ -68,5 +99,6 @@ const isSupportedFileType = (filePath) => {
 }
 
 export {
-    doRomAutoScan
+    doRomAutoScan,
+    doEmulatorAutoScan
 }

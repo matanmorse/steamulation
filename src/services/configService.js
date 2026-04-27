@@ -48,6 +48,7 @@ const settingsStore = new Store({
 })
 
 const setEmulatorPath = (name, path) => {
+    console.log(`setting ${name} to ${path}`)
     settingsStore.set(`${name}-exe-path`, path)
 }
 

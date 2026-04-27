@@ -1,7 +1,7 @@
 import EmulatorNameAndIcon from "../EmulatorNameAndIcon"
 import ROMSettingsWindow from "./ROMSettingsWindow";
 
-const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator, SetRomFolder, ResetRomFolder, SelectedEmulatorExePath, RomFolderPath, setUserConfigureManually}) => {
+const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmulator, SelectedEmulatorExePath, setUserConfigureManually}) => {
     return (
     <form className="settings-form">
         <EmulatorNameAndIcon emulatorName={selectedEmulator} size={4.5} bold={true} otherText={selectedEmulator != 'Rom Folder' ? "Emulator Settings" : "Settings"}/>
@@ -17,7 +17,6 @@ const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmul
                     </input>
                     <i className="bi bi-x-lg" onClick={(e) => ResetEmulator(e, selectedEmulator)}></i>
                 </div>
-                
                 <button class="exe-input-button" onClick={(e) => SetEmulator(e, selectedEmulator) }><i class="bi bi-folder" style={{fontSize: '16pt'}}></i> Browse</button>
             </div>
             {SelectedEmulatorExePath() !== undefined ? 
@@ -29,9 +28,6 @@ const EditSettingsWindow = ({selectedEmulator, emulators, ResetEmulator, SetEmul
             </> : 
             /* Special window for rom folder*/
                 <ROMSettingsWindow 
-                    ResetRomFolder={ResetRomFolder}
-                    SetRomFolder={SetRomFolder}
-                    RomFolderPath={RomFolderPath}
                 />
             } 
         </div>

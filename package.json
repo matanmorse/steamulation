@@ -8,6 +8,7 @@
     "7zip-bin": "^5.2.0",
     "adm-zip": "^0.5.17",
     "apicalypse": "^1.0.5",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.4.2",
     "electron": "^41.3.0",
     "electron-forge": "^5.2.4",
@@ -20,6 +21,10 @@
     "steamgriddb": "^2.2.1"
   },
   "scripts": {
-    "start": "electron ."
+    "start": "cross-env NODE_ENV=development nodemon --watch src --ext js --exec electron ."
+  },
+  "devDependencies": {
+    "electron-reload": "^2.0.0-alpha.1",
+    "nodemon": "^3.1.14"
   }
 }

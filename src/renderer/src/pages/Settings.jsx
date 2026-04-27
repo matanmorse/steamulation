@@ -33,11 +33,6 @@ const Settings = () => {
         refetchEmulators()
     }
 
-    const ResetRomFolder = async (e) => {
-        e.preventDefault;
-        await window.configService.resetRomFolder()
-        refetchEmulators()
-    }
 
     return (
         <>
@@ -51,7 +46,6 @@ const Settings = () => {
                 ResetEmulator={ResetEmulator}
                 selectedEmulator={selectedEmulator}
                 SetRomFolder={SetRomFolder}
-                ResetRomFolder={ResetRomFolder}
                 />
         </>
        

@@ -42,7 +42,7 @@ const selectExe = async (emulatorName) => {
             {name: 'Executable', extensions: ['exe']}
         ]
     })
-    
+    if (!result.filePaths[0]) return;
     setEmulatorPath(emulatorName, result.filePaths[0]);
     return result.filePaths[0]
 }

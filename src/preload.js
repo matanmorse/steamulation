@@ -45,7 +45,8 @@ contextBridge.exposeInMainWorld('autoInstallService', {
 })
 
 contextBridge.exposeInMainWorld('scanService', {
-  doRomAutoScan: () => invoke('do-rom-auto-scan')
+  doRomAutoScan: () => invoke('do-rom-auto-scan'),
+  doEmulatorAutoScan: (emulatorName) => invoke('do-emulator-auto-scan', emulatorName)
 })
 
 contextBridge.exposeInMainWorld('debugService', {

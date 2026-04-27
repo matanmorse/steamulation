@@ -6,7 +6,6 @@ import { useEmulator } from "../../contexts/SharedContext";
 const AutoInstallWindow = ({selectedEmulator, setUserConfigureManually}) => { 
     const [isInstalling, setIsInstalling] = useState(false);
     const {refetchEmulators} = useEmulator();
-    
     const DoAutoInstallation = async () => {    
         setIsInstalling(true);
         await window.autoInstallService.autoInstallAndConfigure(selectedEmulator)
@@ -27,6 +26,12 @@ const AutoInstallWindow = ({selectedEmulator, setUserConfigureManually}) => {
                 }
                 <button className="configure-manually-button" onClick={() => setUserConfigureManually(true)}>
                     Configure Manually
+                </button>
+                <button className="configure-manually-button" onClick={async () => {
+                    await window.scanService.doEmulatorAutoScan(selectedEmulator)
+                    refetchEmulators();
+                    }}>
+                    Scan for existing
                 </button>
             </div>
             {isInstalling && 

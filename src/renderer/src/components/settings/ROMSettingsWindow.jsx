@@ -24,9 +24,10 @@ const ROMSettingsWindow = () => {
                 </thead>
                 <tbody>
                     {roms.map((rom) => {
+                        return (
                         <tr>
-                            <td>{rom.name}</td>
-                        </tr>
+                            <td>{rom.path}</td>
+                        </tr>)
                     })}
                 </tbody>
             </table>

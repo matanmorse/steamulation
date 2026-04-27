@@ -2,7 +2,7 @@ import {app, BrowserWindow, ipcMain} from 'electron'
 import { fileURLToPath } from 'url';
 import path from 'node:path'
 import { selectExe, selectRomFolder, getGames } from './services/fileService.js';
-import { doRomAutoScan } from './services/scanService.js';
+import { doEmulatorAutoScan, doRomAutoScan } from './services/scanService.js';
 import { launchGame } from './services/launchGameService.js';
 import { getEmulatorsConfig, getSupportedEmulators, hasSettings, isDev, resetRomFolderPath, resetSettings } from './services/configService.js'
 import { AutoInstallAndConfigure } from './services/autoInstallService.js'
@@ -12,9 +12,9 @@ import { getMetadata, metadataCache } from './services/metadataService.js';
 import withCache, { clearCache } from './caching.js';
 import { clearCache as clearCacheDebug, clearRoms } from './services/debugService.js';
 
-if (startup) {app.quit()}
-
 dotenv.config({quiet: true})
+
+if (startup) {app.quit()}
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -23,6 +23,7 @@ let win;
 const createWindow = () => {
     // TODO: Open to window size
     win = new BrowserWindow({
+        show: false,
         width: 1440,
         height: 850,
         frame:false,
@@ -66,7 +67,8 @@ app.whenReady().then(() => {
     handleIpc('clear-cache', (e, key) => clearCacheDebug(key))
     handleIpc('clear-roms', () => clearRoms())
     handleIpc('do-rom-auto-scan', () => doRomAutoScan())
-    
+    handleIpc('do-emulator-auto-scan', (e, emulatorName) => doEmulatorAutoScan(emulatorName))
+
     handleIpc('window-minimize', () => win.minimize());
     handleIpc('window-maximize', () => {
     if (win.isMaximized()) {
@@ -80,6 +82,11 @@ app.whenReady().then(() => {
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
     })
+
+    win.once('ready-to-show', () => {
+        win.show();
+        win.focus();
+    });
 })
 
 app.on('window-all-closed', () => {
