@@ -14,19 +14,18 @@ import Debug from './pages/Debug.jsx'
 const Router = import.meta.env.DEV ? BrowserRouter : HashRouter
 createRoot(document.getElementById('main')).render(
 <Router>
+  <EmulatorProvider>
   <ModalProvider>
-    <EmulatorProvider>
       <StrictMode>
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<App />} />
-              <Route path='/settings' element={<Settings />} />
               <Route path='/debug' element={<Debug />} />
             </Route>
           </Routes>
       </StrictMode>
-    </EmulatorProvider>,
   </ModalProvider>
+  </EmulatorProvider>,
 </Router>
 
 )

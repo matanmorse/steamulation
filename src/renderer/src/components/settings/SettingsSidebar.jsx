@@ -1,48 +1,20 @@
+import { useState } from 'react';
 import { useEmulator } from '../../contexts/SharedContext'
 import '../../styles/Settings.css'
 import EmulatorNameAndIcon from '../EmulatorNameAndIcon'
-const SettingsSidebar = ({isLoading, selectedEmulator, setSelectedEmulator}) => {
+const SettingsSidebar = ({isLoading, submenu, setSubmenu}) => {
     const {emulators} = useEmulator();
     
     return (
-        <div class="sidebar">
-                <div className="sidebar-title-wrapper">
-                    <i class="bi bi-gear settings-gear"></i>
-                    <h1 class="sidebar-title">App Settings</h1>
+        <div className="emulator-settings-sidebar">
+                <h6 className="sidebar-title">Settings</h6>
+                <div className="option-icon-group" onClick={() => setSubmenu('emulators')}>
+                    <i className="bi bi-controller"></i>
+                    <h3 className="settings-sidebar-option">Emulators</h3>
                 </div>
-                <h3>Emulators</h3>
-                <hr/>
-                <div className="emulators-list">
-                        {!isLoading && 
-                        emulators
-                        .filter(emulator => emulator.prettyName !== 'Rom Folder')
-                        .sort((a,b) => a.prettyName.localeCompare(b.prettyName))
-                        .map((emulator, key) => {return (
-                        <div key={key} 
-                        className={"emulator-select-wrapper " 
-                        + (selectedEmulator === emulator.prettyName ? 
-                        "emulator-select-selected" : "emulator-select-hover")}
-                        onClick={() => setSelectedEmulator(emulator.prettyName)}>
-
-                            <EmulatorNameAndIcon
-                                key={key}
-                                emulatorName={emulator.prettyName}
-                            />
-                        </div>
-                    )})}
-                </div>
-                <h3>Rom Folder</h3>
-                <hr/>
-                <div className="romfolder-select">
-                    <div
-                        className={"emulator-select-wrapper " 
-                        + (selectedEmulator === 'Rom Folder' ? 
-                        "emulator-select-selected" : "emulator-select-hover")}
-                        onClick={() => setSelectedEmulator('Rom Folder')}>
-                            <EmulatorNameAndIcon
-                                emulatorName={'Rom Folder'}
-                            />
-                        </div>
+                <div className="option-icon-group" onClick={() => setSubmenu('roms')}>
+                    <i className="bi bi-joystick"></i>
+                    <h3 className="settings-sidebar-option">Rom Folder</h3>
                 </div>
             </div>
     )

@@ -66,6 +66,7 @@ a:hover {
   cursor: pointer;
   transition: all 0.15s ease;
   color: var(--clr-text-primary);
+  height: fit-content;
 }
 
 /* Primary - main actions */
@@ -137,9 +138,23 @@ a:hover {
   pointer-events: none;
 }
 
+button:focus-visible {
+  outline: none;
+}
+
 .transparent {
   opacity: 0%;
   pointer-events: none;
+}
+
+.text-highlight {
+  color: var(--clr-text-primary) !important;
+}
+
+.text-info {
+  color: var(--clr-text-secondary);
+  margin-top: .5rem;
+  margin-bottom: .5rem;
 }
 
 * {

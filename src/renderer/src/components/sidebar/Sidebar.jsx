@@ -3,11 +3,15 @@ import '../../styles/Sidebar.css'
 import { useEffect, useState } from "react";
 import SystemFilters from "./SystemFilters";
 import { useNavigate } from "react-router-dom";
+import { useModal } from "../../contexts/ModalContext";
+import DebugModal from "../../modals/DebugModal";
+import Settings from "../../pages/Settings";
 
 const Sidebar = () => {
     const [selectedOption, setSelectedOption] = useState('all_games')
     const [systemFilters, setSystemFilters] = useState([])
-    const navigate = useNavigate();
+    const {showModal} = useModal();
+
     const addSystemFilter = (system) => setSystemFilters([...new Set([...systemFilters, system])])
     const removeSystemFilter = (system) => {
         if (!systemFilters.includes(system)) return;
@@ -51,11 +55,11 @@ const Sidebar = () => {
          </div>
         <div className="sidebar-bottom">
             <hr/>
-            <div className="option-icon-group settings" onClick={() => navigate('/settings')}>
+            <div className="option-icon-group settings" onClick={() => showModal(<Settings />)}>
                 <i className="bi bi-gear" />
                 <h6 className="settings-title">Settings</h6>
             </div>
-            <div className="option-icon-group settings" onClick={() => navigate('/debug')}>
+            <div className="option-icon-group settings" onClick={() => showModal(<DebugModal />)}>
                 <i className="bi bi-tools" />
                 <h6 className="settings-title">Debug</h6>
             </div>

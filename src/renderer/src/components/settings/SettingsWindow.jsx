@@ -1,17 +1,24 @@
 import { useState } from "react";
 import EmulatorNameAndIcon from "../EmulatorNameAndIcon";
-import EditSettingsWindow from "./EditSettingsWindow";
-import AutoInstallWindow from "./AutoInstallWindow";
+import EditSettingsWindow from "./submenus/EditSettingsWindow";
 import { useEffect } from "react";
 import { useEmulator } from "../../contexts/SharedContext";
+import EmulatorsSettings from "./submenus/EmulatorsSettings";
+import ROMSettingsWindow from "./submenus/ROMSettingsWindow";
 
-const SettingsWindow = ({selectedEmulator, ResetEmulator, SetEmulator, SetRomFolder, ResetRomFolder, fetchEmulatorConfigs}) => {
-    const {emulators} = useEmulator();
-
-    const SelectedEmulatorExePath = () => {
-        if (!emulators.find(x=>x.name===selectedEmulator)) return undefined;
-        return emulators.find(x=>x.name===selectedEmulator).exePath
+const SettingsWindow = ({submenu, ResetEmulator, SetEmulator, SetRomFolder, ResetRomFolder, fetchEmulatorConfigs}) => {
+    const SettingsWindowsRegistries = {
+        roms: ROMSettingsWindow,
+        emulators: EmulatorsSettings
     }
+
+    const ActiveWindow = SettingsWindowsRegistries[submenu];
+    const {emulators} = useEmulator();
+    const SelectedEmulatorExePath = (emulatorName) => {
+        if (!emulators.find(x=>x.name===emulatorName)) return undefined;
+        return emulators.find(x=>x.name===emulatorName).exePath
+    }
+
     const RomFolderPath = () => {
         if (!emulators.find(x=>x.name==='Rom Folder')) return undefined;
         return emulators.find(x=>x.name==='Rom Folder').folderPath
@@ -22,33 +29,16 @@ const SettingsWindow = ({selectedEmulator, ResetEmulator, SetEmulator, SetRomFol
     /* When changing emulator settings window, default to auto-install window if not configured */
     useEffect(() => {
         setUserConfigureManually(false);
-    }, [selectedEmulator])
+    }, [submenu])
 
     return (
-        <div class="emulator-settings">
-                <div className="emulator-settings-wrapper">
-                    <div className="settings-title-wrapper">
-                        <i className="bi bi-gear-fill settings-gear"></i>
-                        <h2>Emulator Configuration</h2>
-                    </div>
-                    {userConfigureManually || SelectedEmulatorExePath() !== undefined || (RomFolderPath() !== undefined && selectedEmulator === 'Rom Folder') ? (
-                        <EditSettingsWindow 
-                            selectedEmulator={selectedEmulator}
-                            ResetEmulator={ResetEmulator}
-                            SetEmulator={SetEmulator}
-                            SetRomFolder={SetRomFolder}
-                            ResetRomFolder={ResetRomFolder}
-                            SelectedEmulatorExePath={SelectedEmulatorExePath}
-                            RomFolderPath={RomFolderPath}
-                            setUserConfigureManually={setUserConfigureManually}
-                    />) : (
-                        <AutoInstallWindow 
-                        selectedEmulator={selectedEmulator} 
-                        setUserConfigureManually={setUserConfigureManually}      
-                        />
-                    )}
-                </div>
-            </div>
+        <ActiveWindow 
+            submenu={submenu}
+            resetEmulator={ResetEmulator}
+            SetRomFolder={SetRomFolder}
+            setEmulator={SetEmulator}
+            selectedEmulatorExePath={SelectedEmulatorExePath}
+        />
     )
 }
 

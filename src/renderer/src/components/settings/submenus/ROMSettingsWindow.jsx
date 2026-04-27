@@ -9,11 +9,11 @@ const ROMSettingsWindow = () => {
     }, [])
 
     return (
-        <>
+        <div className="rom-settings">
             <label>Select folders containing ROMs yourself, or use the auto scan feature:</label>
             <div className="auto-install-buttons-wrapper">
-                <button onClick={(e) => {e.preventDefault(); window.scanService.doRomAutoScan()}}>Auto Scan</button>
-                <button className="configure-manually-button">Select folder manually</button>
+                <button className="btn btn-primary btn-lg" onClick={(e) => {e.preventDefault(); window.scanService.doRomAutoScan()}}>Auto Scan</button>
+                <button className="btn btn-ghost btn-lg">Select folder manually</button>
             </div>
             <h4>{roms.length} Loaded ROMs:</h4>
             <table className="loaded-roms-table">
@@ -23,15 +23,16 @@ const ROMSettingsWindow = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {roms.map((rom) => {
+                    {roms.map((rom, key) => {
                         return (
-                        <tr>
+                        <tr key={key}>
                             <td>{rom.path}</td>
                         </tr>)
                     })}
                 </tbody>
             </table>
-        </>
+        <div/>
+        </div>
     )
 }
 

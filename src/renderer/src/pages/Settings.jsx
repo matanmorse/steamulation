@@ -6,10 +6,13 @@ import EmulatorNameAndIcon from '../components/EmulatorNameAndIcon'
 import SettingsSidebar from '../components/settings/SettingsSidebar'
 import SettingsWindow from '../components/settings/SettingsWindow'
 import { useEmulator } from '../contexts/SharedContext'
+import { useModal } from '../contexts/ModalContext'
 
 const Settings = () => {
-    const [selectedEmulator, setSelectedEmulator] = useState('Citra')
+    const [submenu, setSubMenu] = useState('emulators')
     const {emulators, refetchEmulators} = useEmulator();
+    const {hideModal} = useModal();
+
     useEffect(() => {
         console.log('fetching configs')
         refetchEmulators()
@@ -35,19 +38,20 @@ const Settings = () => {
 
 
     return (
-        <>
+        <div className="settings-modal">
             <SettingsSidebar
                 emulators={emulators}
-                selectedEmulator={selectedEmulator}
-                setSelectedEmulator={setSelectedEmulator} 
+                submenu={submenu}
+                setSubmenu={setSubMenu} 
             />
             <SettingsWindow
                 SetEmulator={SetEmulator}
                 ResetEmulator={ResetEmulator}
-                selectedEmulator={selectedEmulator}
+                submenu={submenu}
                 SetRomFolder={SetRomFolder}
                 />
-        </>
+            <i className="close-modal bi bi-x" onClick={() => hideModal()}></i>
+        </div>
        
     )
 }

@@ -1,7 +1,7 @@
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
@@ -13,13 +13,18 @@
 .modal-content:has(.error-modal){
     max-width: 1250px;
 }
+
+/* Specific styling for error modals to fit stack */
+.modal-content:has(.settings-modal){
+    padding: 0rem;
+}
+
 .modal-content {
-    background: #1e2329;
+    padding: 2rem;
+    background: var(--clr-surface-0);
     border: 1px solid #3d4450;
     border-radius: 8px;
-    padding: 2rem;
     min-width: 400px;
-    max-width: 500px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
 }
 

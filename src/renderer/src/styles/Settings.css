@@ -1,98 +1,176 @@
-.emulator-settings {
-  flex: 5;
+.settings-modal {
   display: flex;
-  flex-direction: column;
-  padding: 2rem;
-  background-color: var(--clr-surface-a0);
-  .emulator-settings-wrapper {
-    max-width: 1000px;
-  }
+  background-color: var(--clr-surface-0);
+  width: 80vw;
+  border-radius: 8px;
+  height: 85vh;
+  position: relative;
+}
 
-  .settings-form {
+.settings-form {
     background-color: var(--clr-surface-a10);
     padding: 1rem 2rem 1rem 2rem ;  
     text-align: start;
     border-radius: 10px;
     min-height: 400px;
-    label {
-      color: var(--clr-light-a30)
-    }
+    width: 100%;
+    color: var(--clr-text-secondary);
+  }
 
+.settings-form > .label-wrapper > p {
+  color: var(--clr-text-primary)
+}
+
+.label-wrapper > p {
+  color: var(--clr-text-secondary)
+}
+
+.emulator-settings {
+  flex: 5;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background-color: var(--clr-surface-1);
+  }
+
+  .buttons {
+    display: flex;
+    width: 100% !important;
+    flex-direction: column;
+    gap: 1rem;
+    width: fit-content;
     button {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      height: auto;
-    }
-
-    .exe-path-form-wrapper {
-      margin-top: 2rem;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .input-wrapper {
-      flex: 1;
-      display: flex;
-      position: relative;
-    }
-
-    input[type="text"] {
-      padding: 1rem;
-      background-color: var(--clr-surface-a0);
-      border: 1px solid var(--clr-surface-a30);
-      border-radius: 5px;
-      width: 100%;
-      padding-right: 2rem;
-    }
-
-    .bi-x-lg {
-      position:absolute;
-      top: 12px;
-      right: 10px;
-
-      
-    }
-    .bi-x-lg:hover {
-        cursor: pointer;
-    }
-    .gray-text::placeholder {
-    color: var(--clr-light-a50) !important;
-    }
-    input[type="text"]::placeholder {
-      color: var(--clr-light-a10);
-      font-size: 12pt;
-    }
-    .exe-input-wrapper {
-      gap: .5rem;
-      display: flex;
-      align-items: center;
-      width: 100%;
+      width: fit-content  ;
     }
   }
 
-  .settings-title-wrapper {
-    margin-bottom: 2rem;
+  .button-label {
     display: flex;
-    align-items: center;
-    gap: .75rem;
-    padding: .25rem;
-    border-bottom: 1px solid var(--clr-surface-a10);
+    justify-content: space-between;
+    width: 100%;
+  }
 
-    h2 {
-      font-weight: bolder;
-      margin: 0rem;
+  .emulator-settings-wrapper {
+    max-width: 1000px;
+  }
+
+
+  .exe-path-form-wrapper {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .input-wrapper {
+    flex: 1;
+    display: flex;
+    position: relative;
+  }
+
+  .bi-x-lg {
+    position:absolute;
+    top: 12px;
+    right: 10px;
+  }
+
+  .bi-x-lg:hover {
+      cursor: pointer;
+  }
+  .gray-text::placeholder {
+  color: var(--clr-light-a50) !important;
+  }
+  
+  .current-exe-path::placeholder {
+    color: var(--clr-text-tertiary);
+  }
+
+  .current-exe-path {
+    width: 100%;
+    background-color: transparent;
+    border: none;
+    &:focus-visible {
+      outline: none;
     }
+  }
+
+  .flex-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .exe-input-wrapper {
+    gap: .5rem;
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    max-width: 600px;
+      background-color: var(--clr-surface-1);
+    border: 1px solid var(--clr-border);
+    padding: 5px;
+
+  }
+
+  .exe-input-button {
+    color: var(--clr-text-secondary);
+    font-size: 16px
   }
 
   .settings-gear {
     font-size: 22pt;
     color: var(--clr-primary-a20)
   }
-}
+
 
 .custom-file-input::-webkit-file-upload-button {
     visibility: hidden;
+}
+
+
+.sidebar-title {
+  font-size: 14px;
+  margin-top: 0px;
+  margin-bottom: .5rem;
+  color: var(--clr-text-tertiary);
+  font-weight: normal;
+}
+
+.settings-sidebar-option {
+  font-size: 18px;
+  margin: 0px;
+  color: var(--clr-text-secondary);
+  font-weight: normal;
+}
+
+.emulators-list {
+  background-color: var(--clr-surface-2);
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  border-right: 1px solid var(--clr-border);
+  width: fit-content;
+}
+
+.emulators-settings {
+  display: flex;
+  flex: 1;
+}
+
+.text-info {
+  color: var(--clr-text-secondary);
+}
+
+.close-modal {
+  position: absolute;
+  top: 0px;
+  right: 4px;
+  font-size: 24px;
+  color: var(--clr-text-secondary)
+}
+
+.option-icon-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
 }
 
 .custom-file-input::before {
@@ -131,13 +209,13 @@
   align-items: center;
   gap: 10px;
   font-size: larger;
+  padding: 10px 15px 10px 15px;
 }
 
 .auto-install-buttons-wrapper {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
-  justify-content: center;
 }
 
 .configure-manually-button {
@@ -171,4 +249,21 @@
   }
 }
 
-  
+.emulator-settings-sidebar {
+  padding: 1.5rem;
+  padding-top: .5rem;
+  border-right: 1px solid var(--clr-border);
+  background-color: var(--clr-surface-2);
+
+}
+
+.rom-settings {
+  padding: 2rem;
+}
+
+.reset-emulator {
+  font-size: 14px;
+  position:unset;
+  margin-top: 3px;
+  color: var(--clr-text-secondary)
+}
