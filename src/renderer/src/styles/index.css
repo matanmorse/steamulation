@@ -79,14 +79,23 @@ a:hover {
   border-color: rgba(192, 92, 246, 0.5);
 }
 
+.btn-primary.selected:hover{
+  background: rgba(139, 92, 246, 0.2);
+  border-color: var(--clr-primary-border);
+  color: var(--clr-primary-1);
+}
+
 /* Ghost - secondary actions */
 .btn-ghost {
-  background: transparent;
+  background: var(--clr-surface-2);
   border-color: var(--clr-border);
+  color: var(--clr-text-secondary)
 }
+
 .btn-ghost:hover {
-  background: var(--clr-surface-active);
+  background: var(--clr-surface-3);
   border-color: rgba(255, 255, 255, 0.12);
+  color: var(--clr-text-primary)
 }
 
 /* Danger - destructive actions */
@@ -128,10 +137,16 @@ a:hover {
   pointer-events: none;
 }
 
+.transparent {
+  opacity: 0%;
+  pointer-events: none;
+}
+
 * {
   --clr-surface-0: rgb(20, 20, 30);
-  --clr-surface-1: rgb(26, 26, 40);
-  --clr-surface-2: rgb(39, 38, 60);
+  --clr-surface-1: rgba(255, 255, 255, 0.025);
+  --clr-surface-2: rgba(255, 255, 255, 0.05);
+  --clr-surface-3: rgba(255, 255, 255, 0.075);
   --clr-surface-active: rgba(255, 255, 255, 0.05);
 
   --clr-primary-1: rgb(196,181,253);

@@ -50,14 +50,11 @@
         margin: 0px;
     }
 
-    .option-icon-group.settings {
-        margin-bottom: .5rem;
-    }
-
     .settings-title {
         color: var(--clr-text-secondary);
         font-size: 14px;
         margin: 0px;
+        font-weight: normal;
     }
 
     hr {

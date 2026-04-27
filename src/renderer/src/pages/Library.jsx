@@ -2,12 +2,13 @@ import { useState, useEffect, use } from 'react'
 import {Link} from 'react-router-dom'
 import {Clock, Star, Gamepad2} from 'lucide-react'
 import {Library as LibraryIcon} from 'lucide-react'
-import '../styles/App.css'
+import '../styles/Library.css'
 import GameCard from '../components/GameCard'
+import LibraryTopbar from '../components/library/LibraryTopbar'
 
 function App() {
   const [games, setGames] = useState([])
-  const [selectedTab, setSelectedTab] = useState('All Games')
+  const [libraryFilter, setLibraryFilter] = useState('all')
 
   useEffect(() => {
       fetchGames();
@@ -23,10 +24,10 @@ function App() {
   return (
     <>
       <div className="library">
-        <div className="library-title-wrapper">
-          <LibraryIcon size={35}/>
-          <h2 className='library-title'> Your Game Library </h2>
-        </div>
+        <LibraryTopbar 
+          setLibraryFilter={setLibraryFilter}
+          libraryFilter={libraryFilter}
+        />
         <div className="game-card-grid">
           {games.map((game, index) => (
             <GameCard key={index} game={game}/>

@@ -54,11 +54,10 @@ const GameCard = ({game}) => {
             <div className="game-card-image-wrapper" style={{backgroundImage: `url(${game.coverArt})`}}>
                 {isLoading && <ClipLoader class="game-card-loader" size={60} color='blue'/>}
                 <div className="game-info"> 
-
-                <button className="game-card-launch-button" onClick={launchGame}>
-                    <PlayCircleIcon/>
-                </button>
-            </div>
+                    <button className="btn btn-primary btn-icon" onClick={launchGame}>
+                        <PlayCircleIcon/>
+                    </button>
+                </div>
             {!game.name && <p style={{textWrap:'wrap', wordBreak: 'break-word'}}>{game.path}</p>}
             </div>
         </div>
